@@ -1,0 +1,314 @@
+[
+  {
+    "abbr": "BAG",
+    "name": "Bagley Hall (East Entrance)",
+    "lat": 1914.5103,
+    "lng": 1709.8816
+  },
+  {
+    "abbr": "BAG (NE)",
+    "name": "Bagley Hall (Northeast Entrance)",
+    "lat": 1878.3786,
+    "lng": 1661.4083
+  },
+  {
+    "abbr": "BGR",
+    "name": "By George",
+    "lat": 1671.5499,
+    "lng": 1258.4333
+  },
+  {
+    "abbr": "CSE",
+    "name": "Paul G. Allen Center for Computer Science & Engineering",
+    "lat": 2259.7112,
+    "lng": 1715.5273
+  },
+  {
+    "abbr": "CS2",
+    "name": "Bill & Melinda Gates Center For Computer Science & Engineering",
+    "lat": 2315.0936,
+    "lng": 1780.7913
+  },
+  {
+    "abbr": "DEN",
+    "name": "Denny Hall",
+    "lat": 1890,
+    "lng": 892.57144
+  },
+  {
+    "abbr": "EEB",
+    "name": "Electrical Engineering Building (North Entrance)",
+    "lat": 2159.9587,
+    "lng": 1694.8192
+  },
+  {
+    "abbr": "EEB (S)",
+    "name": "Electrical Engineering Building (South Entrance)",
+    "lat": 2135.2099,
+    "lng": 1741.5387
+  },
+  {
+    "abbr": "GWN",
+    "name": "Gowen Hall",
+    "lat": 2022.3254,
+    "lng": 1210.9561
+  },
+  {
+    "abbr": "KNE",
+    "name": "Kane Hall (North Entrance)",
+    "lat": 1876.6109,
+    "lng": 1165.2467
+  },
+  {
+    "abbr": "KNE (E)",
+    "name": "Kane Hall (East Entrance)",
+    "lat": 1874.338,
+    "lng": 1212.4713
+  },
+  {
+    "abbr": "KNE (SE)",
+    "name": "Kane Hall (Southeast Entrance)",
+    "lat": 1835.1946,
+    "lng": 1241.0081
+  },
+  {
+    "abbr": "KNE (S)",
+    "name": "Kane Hall (South Entrance)",
+    "lat": 1812.7187,
+    "lng": 1230.149
+  },
+  {
+    "abbr": "KNE (SW)",
+    "name": "Kane Hall (Southwest Entrance)",
+    "lat": 1787.2124,
+    "lng": 1218.5323
+  },
+  {
+    "abbr": "LOW",
+    "name": "Loew Hall",
+    "lat": 2375.6262,
+    "lng": 1576.1262
+  },
+  {
+    "abbr": "MGH",
+    "name": "Mary Gates Hall (North Entrance)",
+    "lat": 1973.1382,
+    "lng": 1433.6676
+  },
+  {
+    "abbr": "MGH (E)",
+    "name": "Mary Gates Hall (East Entrance)",
+    "lat": 2043.1036,
+    "lng": 1514.917
+  },
+  {
+    "abbr": "MGH (S)",
+    "name": "Mary Gates Hall (South Entrance)",
+    "lat": 2057.1756,
+    "lng": 1564.762
+  },
+  {
+    "abbr": "MGH (SW)",
+    "name": "Mary Gates Hall (Southwest Entrance)",
+    "lat": 1971.6531,
+    "lng": 1551.6673
+  },
+  {
+    "abbr": "MLR",
+    "name": "Miller Hall",
+    "lat": 2184.7074,
+    "lng": 1045.0386
+  },
+  {
+    "abbr": "MOR",
+    "name": "Moore Hall",
+    "lat": 2317.1749,
+    "lng": 1859.502
+  },
+  {
+    "abbr": "MUS",
+    "name": "Music Building (Northwest Entrance)",
+    "lat": 2202.5882,
+    "lng": 957.31147
+  },
+  {
+    "abbr": "MUS (E)",
+    "name": "Music Building (East Entrance)",
+    "lat": 2261.6656,
+    "lng": 1011.4323
+  },
+  {
+    "abbr": "MUS (SW)",
+    "name": "Music Building (Southwest Entrance)",
+    "lat": 2243.4795,
+    "lng": 1040.5275
+  },
+  {
+    "abbr": "MUS (S)",
+    "name": "Music Building (South Entrance)",
+    "lat": 2255.3257,
+    "lng": 1048.2583
+  },
+  {
+    "abbr": "OUG",
+    "name": "Odegaard Undergraduate Library",
+    "lat": 1724.1276,
+    "lng": 1208.4754
+  },
+  {
+    "abbr": "PAA",
+    "name": "Physics/Astronomy Building A",
+    "lat": 1625.2679,
+    "lng": 1783.5181
+  },
+  {
+    "abbr": "PAB",
+    "name": "Physics/Astronomy Building",
+    "lat": 1560.6467,
+    "lng": 1698.3767
+  },
+  {
+    "abbr": "SAV",
+    "name": "Savery Hall",
+    "lat": 1951.8672,
+    "lng": 1094.7886
+  },
+  {
+    "abbr": "SUZ",
+    "name": "Suzzallo Library",
+    "lat": 1895.8038,
+    "lng": 1325.861
+  },
+  {
+    "abbr": "T65",
+    "name": "Thai 65",
+    "lat": 1370.6408,
+    "lng": 807.35188
+  },
+  {
+    "abbr": "FSH",
+    "name": "Fishery Sciences Building",
+    "lat": 1061.8213,
+    "lng": 1779.6903
+  },
+  {
+    "abbr": "MCC",
+    "name": "McCarty Hall (Main Entrance)",
+    "lat": 2345.7143,
+    "lng": 528.64286
+  },
+  {
+    "abbr": "MCC (S)",
+    "name": "McCarty Hall (South Entrance)",
+    "lat": 2437.4981,
+    "lng": 610.1679
+  },
+  {
+    "abbr": "UBS",
+    "name": "University Bookstore",
+    "lat": 1373.6078,
+    "lng": 556.55779
+  },
+  {
+    "abbr": "UBS (Secret)",
+    "name": "University Bookstore (Secret Entrance)",
+    "lat": 1440.1364,
+    "lng": 520.85309
+  },
+  {
+    "abbr": "RAI",
+    "name": "Raitt Hall (West Entrance)",
+    "lat": 2024.5103,
+    "lng": 993.01223
+  },
+  {
+    "abbr": "RAI (E)",
+    "name": "Raitt Hall (East Entrance)",
+    "lat": 2094.2987,
+    "lng": 956.90276
+  },
+  {
+    "abbr": "ROB",
+    "name": "Roberts Hall",
+    "lat": 2309.4107,
+    "lng": 1979.0003
+  },
+  {
+    "abbr": "CHL",
+    "name": "Chemistry Library (West Entrance)",
+    "lat": 1707.6629,
+    "lng": 1671.5098
+  },
+  {
+    "abbr": "CHL (NE)",
+    "name": "Chemistry Library (Northeast Entrance)",
+    "lat": 1746.0487,
+    "lng": 1672.52
+  },
+  {
+    "abbr": "CHL (SE)",
+    "name": "Chemistry Library (Southeast Entrance)",
+    "lat": 1762.7162,
+    "lng": 1708.8855
+  },
+  {
+    "abbr": "IMA",
+    "name": "Intramural Activities Building",
+    "lat": 2722.3352,
+    "lng": 1710.2859
+  },
+  {
+    "abbr": "HUB",
+    "name": "Student Union Building (Main Entrance)",
+    "lat": 2269.7856,
+    "lng": 1364.3777
+  },
+  {
+    "abbr": "HUB (West Food)",
+    "name": "Student Union Building (West Food Entrance)",
+    "lat": 2270.8682,
+    "lng": 1388.1961
+  },
+  {
+    "abbr": "HUB (South Food)",
+    "name": "Student Union Building (South Food Entrance)",
+    "lat": 2309.3025,
+    "lng": 1450.4487
+  },
+  {
+    "abbr": "MNY",
+    "name": "Meany Hall (Northeast Entrance)",
+    "lat": 1684.1768,
+    "lng": 1297.0716
+  },
+  {
+    "abbr": "MNY (NW)",
+    "name": "Meany Hall (Northwest Entrance)",
+    "lat": 1658.923,
+    "lng": 1295.8089
+  },
+  {
+    "abbr": "PAR",
+    "name": "Parrington Hall",
+    "lat": 1715.3571,
+    "lng": 1060.4286
+  },
+  {
+    "abbr": "MCM",
+    "name": "McMahon Hall (Northwest Entrance)",
+    "lat": 2446.9314,
+    "lng": 898.06137
+  },
+  {
+    "abbr": "MCM (SW)",
+    "name": "McMahon Hall (Southwest Entrance)",
+    "lat": 2419.3153,
+    "lng": 921.79995
+  },
+  {
+    "abbr": "CMU",
+    "name": "Communications Building",
+    "lat": 2344.8512,
+    "lng": 1114.6251
+  }
+]
