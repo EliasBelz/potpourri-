@@ -70,3 +70,26 @@ Widget _mapPlaceHolder() {
               border: Border.all(color: Colors.white, width: 5.0)),
           child: SizedBox(width: 400, height: 600, child: Placeholder())));
 }
+
+Widget _createMap() {
+  return FlutterMap(
+    options: MapOptions(
+      initialCenter: LatLng(2315.0936, 1780.7913),  // gates center :^)
+      initialZoom: 9.2,
+    ),
+    children: [
+      TileLayer(
+        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        userAgentPackageName: 'com.example.app',
+      ),
+      RichAttributionWidget(
+        attributions: [
+          TextSourceAttribution(
+            'OpenStreetMap contributors',
+            // onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+          ),
+        ]
+      )
+    ]
+  );
+}
