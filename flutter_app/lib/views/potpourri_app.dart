@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/views/building_card.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class PotpourriApp extends StatefulWidget {
   const PotpourriApp({super.key});
@@ -43,6 +45,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
   }
 }
 
+/// Fills the drawer with the list of locations
 Widget _fillDrawer() {
   var items = [];
 
@@ -59,6 +62,7 @@ Widget _fillDrawer() {
       });
 }
 
+/// Placeholder widget for the map in the main view
 Widget _mapPlaceHolder() {
   return Center(
       child: Container(
