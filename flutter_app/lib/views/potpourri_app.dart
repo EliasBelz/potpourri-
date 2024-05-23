@@ -31,12 +31,12 @@ class _PotpourriAppState extends State<PotpourriApp> {
             appBar: AppBar(
               title: const Text('Potpourri 🚽'),
               actions: [
-                IconButton(
+                IconButton( // "i'm feeling lucky" route to random building
                     onPressed: () => {print("pin icon")},
                     icon: const Icon(Icons.pin_drop)),
               ],
             ),
-            body: _mapPlaceHolder(),
+            body: _createMap(),
             drawer: Drawer(
               child: _fillDrawer(),
             ),
@@ -71,25 +71,43 @@ Widget _mapPlaceHolder() {
           child: SizedBox(width: 400, height: 600, child: Placeholder())));
 }
 
+// creates flutter map widget to display location
 Widget _createMap() {
+  //47.65334425420228, -122.30558811163986 = allen center true latlong
   return FlutterMap(
     options: MapOptions(
-      initialCenter: LatLng(2315.0936, 1780.7913),  // gates center :^)
-      initialZoom: 9.2,
+      initialCenter: LatLng(47.65334425420228, -122.30558811163986), // replace with location from provider
+      initialZoom: 17,
     ),
     children: [
       TileLayer(
         urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
         userAgentPackageName: 'com.example.app',
       ),
-      RichAttributionWidget(
-        attributions: [
-          TextSourceAttribution(
-            'OpenStreetMap contributors',
-            // onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
-          ),
-        ]
-      )
+      // RichAttributionWidget(
+      //   attributions: [
+      //     TextSourceAttribution(
+      //       'OpenStreetMap contributors',
+      //       onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+      //     ),
+      //   ]
+      // )
     ]
   );
+}
+
+// add building pins to map
+_addMapPins() {
+  // read buildings from file
+  // for each:
+    // pull out latlong for location of map pin and pass to createmappin
+  // return TileLayer (?) holding all pins
+}
+
+_createMapPin(lat, long) {
+  return Marker(
+    child: Icon(Icons.pin),
+    point: LatLng(lat, long)
+  );
+  // ontap: open building details view / reviews
 }
