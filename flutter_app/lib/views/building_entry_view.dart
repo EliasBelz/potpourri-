@@ -34,8 +34,6 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme:
-            const IconThemeData(color: Color.fromARGB(230, 255, 255, 255)),
         title: Semantics(
           label: abbr,
           child: Text(
