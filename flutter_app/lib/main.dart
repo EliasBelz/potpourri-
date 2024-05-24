@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/buildings_db.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_app/providers/campus_provider.dart';
 import 'package:flutter_app/views/potpourri_app.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +18,11 @@ void main() async {
 
   final buildings = await loadVenuesDB('lib/data/building_data.json');
   print(buildings.all.length);
-  runApp(ChangeNotifierProvider(
-    create: (context) => PositionProvider(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => PositionProvider()),
+      ChangeNotifierProvider(create: (context) => CampusProvider(buildings: buildings.all))
+    ],
     child: const PotpourriApp(),
   ));
 }
