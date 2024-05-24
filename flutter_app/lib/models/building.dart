@@ -25,6 +25,15 @@ class Building {
     required this.ratingCount,
   });
 
+  Building.withUpdatedRatings(
+      {required Building building,
+      required this.abbr,
+      required this.name,
+      required this.lat,
+      required this.lng,
+      required this.rating,
+      required this.ratingCount});
+
   factory Building.fromJson(Map<String, dynamic> json) =>
       _$BuildingFromJson(json);
   Map<String, dynamic> toJson() => _$BuildingToJson(this);

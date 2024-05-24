@@ -29,7 +29,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: Scaffold(
-            backgroundColor: Color.fromARGB(255, 19, 0, 46),
+            backgroundColor: const Color.fromARGB(255, 19, 0, 46),
             appBar: AppBar(
               title: const Text('Potpourri 🚽'),
               actions: [
@@ -73,7 +73,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
                   Center(
                     child: Text(
                         'Latitude: ${positionProvider.latitude!.toStringAsFixed(4)} Longitude: ${positionProvider.longitude!.toStringAsFixed(4)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.pink)),
                   ),
                   _mapPlaceHolder(),
@@ -107,12 +107,13 @@ Widget _mapPlaceHolder() {
       child: Container(
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white, width: 5.0)),
-          child: SizedBox(width: 400, height: 600, child: Placeholder())));
+          child:
+              const SizedBox(width: 400, height: 600, child: Placeholder())));
 }
 
 Widget _createMap() {
   return FlutterMap(
-      options: MapOptions(
+      options: const MapOptions(
         initialCenter: LatLng(2315.0936, 1780.7913), // gates center :^)
         initialZoom: 9.2,
       ),
@@ -121,7 +122,7 @@ Widget _createMap() {
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           userAgentPackageName: 'com.example.app',
         ),
-        RichAttributionWidget(attributions: [
+        const RichAttributionWidget(attributions: [
           TextSourceAttribution(
             'OpenStreetMap contributors',
             // onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),

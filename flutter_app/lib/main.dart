@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/models/buildings_db.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_app/views/potpourri_app.dart';
-import 'package:flutter_app/views/building_entry_view.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/position_provider.dart';
@@ -20,6 +19,6 @@ void main() async {
   print(buildings.all.length);
   runApp(ChangeNotifierProvider(
     create: (context) => PositionProvider(),
-    child: PotpourriApp(),
+    child: const PotpourriApp(),
   ));
 }
