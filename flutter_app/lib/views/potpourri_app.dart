@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/position_provider.dart';
 import 'package:flutter_app/views/building_card.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:provider/provider.dart';
 
 class PotpourriApp extends StatefulWidget {
   const PotpourriApp({super.key});
@@ -36,10 +38,48 @@ class _PotpourriAppState extends State<PotpourriApp> {
                     icon: const Icon(Icons.pin_drop)),
               ],
             ),
-            body: _mapPlaceHolder(),
             drawer: Drawer(
               child: _fillDrawer(),
             ),
+            body: Consumer<PositionProvider>(
+                builder: (context, positionProvider, child) {
+              if (positionProvider.latitude == null ||
+                  positionProvider.longitude == null) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 40.0,
+                      width: 40.0,
+                      child: Semantics(
+                        label: 'Loading',
+                        child: const CircularProgressIndicator(),
+                      ),
+                    ),
+                    const Text(
+                        'Cannot find location data. Please make sure location services are enabled!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \nand try again later ;)',
+                        semanticsLabel:
+                            'Cannot find location data. Please make sure location services are enabled and try again later.',
+                        style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.pink)),
+                  ],
+                );
+              }
+              return Column(
+                children: [
+                  Center(
+                    child: Text(
+                        'Latitude: ${positionProvider.latitude!.toStringAsFixed(4)} Longitude: ${positionProvider.longitude!.toStringAsFixed(4)}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.pink)),
+                  ),
+                  _mapPlaceHolder(),
+                ],
+              );
+            }),
           ),
         ));
   }
@@ -54,7 +94,6 @@ Widget _fillDrawer() {
         name: 'Billy G. Center $i',
         callBack: () => {print('Billy G. Center $i')}));
   }
-
   return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
@@ -73,23 +112,20 @@ Widget _mapPlaceHolder() {
 
 Widget _createMap() {
   return FlutterMap(
-    options: MapOptions(
-      initialCenter: LatLng(2315.0936, 1780.7913),  // gates center :^)
-      initialZoom: 9.2,
-    ),
-    children: [
-      TileLayer(
-        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-        userAgentPackageName: 'com.example.app',
+      options: MapOptions(
+        initialCenter: LatLng(2315.0936, 1780.7913), // gates center :^)
+        initialZoom: 9.2,
       ),
-      RichAttributionWidget(
-        attributions: [
+      children: [
+        TileLayer(
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'com.example.app',
+        ),
+        RichAttributionWidget(attributions: [
           TextSourceAttribution(
             'OpenStreetMap contributors',
             // onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
           ),
-        ]
-      )
-    ]
-  );
+        ])
+      ]);
 }

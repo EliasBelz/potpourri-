@@ -1,27 +1,48 @@
+import 'dart:math';
+
+import 'package:json_annotation/json_annotation.dart';
+
+part 'building.g.dart';
+// https://docs.flutter.dev/data-and-backend/serialization/json
+
+@JsonSerializable()
 class Building {
   final String abbr;
   final String name;
   final double lat;
   final double lng;
   final int rating;
-  final int ratings;
-  // final UUIDString uuid;
 
-  Building(
-      {required this.abbr,
-      required this.name,
-      required this.lat,
-      required this.lng,
-      required this.rating,
-      required this.ratings});
+  @JsonKey(name: 'ratings')
+  final int ratingCount;
 
-  Building.withUpdatedRatings(
-    {required Building building,
+  Building({
     required this.abbr,
     required this.name,
     required this.lat,
     required this.lng,
     required this.rating,
-    required this.ratings});
-    //: uuid = building.uuid,
+    required this.ratingCount,
+  });
+
+  factory Building.fromJson(Map<String, dynamic> json) =>
+      _$BuildingFromJson(json);
+  Map<String, dynamic> toJson() => _$BuildingToJson(this);
+
+  /// From food finder TODO cite in readme
+  double distanceFrom({required double lat, required double lng}) {
+    // pythagorean theorem
+    double a = this.lat - lat;
+    double b = this.lng - lng;
+    double c = sqrt(_squared(a) + _squared(b));
+    return c;
+  }
+
+  double distanceInMeters({required double lat, required double lng}) {
+    return 111139 * distanceFrom(lat: lat, lng: lng);
+  }
+
+  num _squared(num x) {
+    return x * x;
+  }
 }
