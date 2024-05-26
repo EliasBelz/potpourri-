@@ -5,7 +5,7 @@
     "lat": 1914.5103,
     "lng": 1709.8816,
     "rating": 2,
-    "ratings": 333
+    "ratings": 3
   },
   {
     "abbr": "BAG (NE)",
@@ -13,7 +13,7 @@
     "lat": 1878.3786,
     "lng": 1661.4083,
     "rating": 4,
-    "ratings": 601
+    "ratings": 6
   },
   {
     "abbr": "BGR",
@@ -21,7 +21,7 @@
     "lat": 1671.5499,
     "lng": 1258.4333,
     "rating": 2,
-    "ratings": 542
+    "ratings": 5
   },
   {
     "abbr": "CSE",
@@ -29,7 +29,7 @@
     "lat": 2259.7112,
     "lng": 1715.5273,
     "rating": 4,
-    "ratings": 881
+    "ratings": 8
   },
   {
     "abbr": "CS2",
@@ -37,7 +37,7 @@
     "lat": 2315.0936,
     "lng": 1780.7913,
     "rating": 4,
-    "ratings": 957
+    "ratings": 9
   },
   {
     "abbr": "DEN",
@@ -45,7 +45,7 @@
     "lat": 1890,
     "lng": 892.57144,
     "rating": 4,
-    "ratings": 183
+    "ratings": 1
   },
   {
     "abbr": "EEB",
@@ -53,7 +53,7 @@
     "lat": 2159.9587,
     "lng": 1694.8192,
     "rating": 5,
-    "ratings": 628
+    "ratings": 6
   },
   {
     "abbr": "EEB (S)",
@@ -61,7 +61,7 @@
     "lat": 2135.2099,
     "lng": 1741.5387,
     "rating": 1,
-    "ratings": 181
+    "ratings": 1
   },
   {
     "abbr": "GWN",
@@ -69,7 +69,7 @@
     "lat": 2022.3254,
     "lng": 1210.9561,
     "rating": 2,
-    "ratings": 953
+    "ratings": 9
   },
   {
     "abbr": "KNE",
@@ -77,7 +77,7 @@
     "lat": 1876.6109,
     "lng": 1165.2467,
     "rating": 3,
-    "ratings": 497
+    "ratings": 4
   },
   {
     "abbr": "KNE (E)",
@@ -85,7 +85,7 @@
     "lat": 1874.338,
     "lng": 1212.4713,
     "rating": 3,
-    "ratings": 572
+    "ratings": 5
   },
   {
     "abbr": "KNE (SE)",
@@ -93,7 +93,7 @@
     "lat": 1835.1946,
     "lng": 1241.0081,
     "rating": 5,
-    "ratings": 898
+    "ratings": 8
   },
   {
     "abbr": "KNE (S)",
@@ -101,7 +101,7 @@
     "lat": 1812.7187,
     "lng": 1230.149,
     "rating": 2,
-    "ratings": 525
+    "ratings": 5
   },
   {
     "abbr": "KNE (SW)",
@@ -109,7 +109,7 @@
     "lat": 1787.2124,
     "lng": 1218.5323,
     "rating": 3,
-    "ratings": 423
+    "ratings": 4
   },
   {
     "abbr": "LOW",
@@ -117,7 +117,7 @@
     "lat": 2375.6262,
     "lng": 1576.1262,
     "rating": 1,
-    "ratings": 858
+    "ratings": 8
   },
   {
     "abbr": "MGH",
@@ -125,7 +125,7 @@
     "lat": 1973.1382,
     "lng": 1433.6676,
     "rating": 2,
-    "ratings": 494
+    "ratings": 4
   },
   {
     "abbr": "MGH (E)",
@@ -133,7 +133,7 @@
     "lat": 2043.1036,
     "lng": 1514.917,
     "rating": 1,
-    "ratings": 296
+    "ratings": 2
   },
   {
     "abbr": "MGH (S)",
@@ -141,7 +141,7 @@
     "lat": 2057.1756,
     "lng": 1564.762,
     "rating": 1,
-    "ratings": 200
+    "ratings": 2
   },
   {
     "abbr": "MGH (SW)",
@@ -149,7 +149,7 @@
     "lat": 1971.6531,
     "lng": 1551.6673,
     "rating": 3,
-    "ratings": 931
+    "ratings": 9
   },
   {
     "abbr": "MLR",
@@ -157,7 +157,7 @@
     "lat": 2184.7074,
     "lng": 1045.0386,
     "rating": 3,
-    "ratings": 894
+    "ratings": 8
   },
   {
     "abbr": "MOR",
@@ -165,7 +165,7 @@
     "lat": 2317.1749,
     "lng": 1859.502,
     "rating": 2,
-    "ratings": 192
+    "ratings": 1
   },
   {
     "abbr": "MUS",
@@ -173,7 +173,7 @@
     "lat": 2202.5882,
     "lng": 957.31147,
     "rating": 1,
-    "ratings": 719
+    "ratings": 7
   },
   {
     "abbr": "MUS (E)",
@@ -181,7 +181,7 @@
     "lat": 2261.6656,
     "lng": 1011.4323,
     "rating": 4,
-    "ratings": 539
+    "ratings": 5
   },
   {
     "abbr": "MUS (SW)",
@@ -189,15 +189,14 @@
     "lat": 2243.4795,
     "lng": 1040.5275,
     "rating": 5,
-    "ratings": 74
-  },
+    "ratings": 7  },
   {
     "abbr": "MUS (S)",
     "name": "Music Building (South Entrance)",
     "lat": 2255.3257,
     "lng": 1048.2583,
     "rating": 5,
-    "ratings": 737
+    "ratings": 7
   },
   {
     "abbr": "OUG",
@@ -205,7 +204,7 @@
     "lat": 1724.1276,
     "lng": 1208.4754,
     "rating": 4,
-    "ratings": 201
+    "ratings": 2
   },
   {
     "abbr": "PAA",
@@ -213,7 +212,7 @@
     "lat": 1625.2679,
     "lng": 1783.5181,
     "rating": 1,
-    "ratings": 189
+    "ratings": 1
   },
   {
     "abbr": "PAB",
@@ -221,15 +220,14 @@
     "lat": 1560.6467,
     "lng": 1698.3767,
     "rating": 1,
-    "ratings": 12
-  },
+    "ratings": 1  },
   {
     "abbr": "SAV",
     "name": "Savery Hall",
     "lat": 1951.8672,
     "lng": 1094.7886,
     "rating": 5,
-    "ratings": 425
+    "ratings": 4
   },
   {
     "abbr": "SUZ",
@@ -237,7 +235,7 @@
     "lat": 1895.8038,
     "lng": 1325.861,
     "rating": 1,
-    "ratings": 269
+    "ratings": 2
   },
   {
     "abbr": "T65",
@@ -245,7 +243,7 @@
     "lat": 1370.6408,
     "lng": 807.35188,
     "rating": 3,
-    "ratings": 155
+    "ratings": 1
   },
   {
     "abbr": "FSH",
@@ -253,7 +251,7 @@
     "lat": 1061.8213,
     "lng": 1779.6903,
     "rating": 4,
-    "ratings": 621
+    "ratings": 6
   },
   {
     "abbr": "MCC",
@@ -261,7 +259,7 @@
     "lat": 2345.7143,
     "lng": 528.64286,
     "rating": 2,
-    "ratings": 291
+    "ratings": 2
   },
   {
     "abbr": "MCC (S)",
@@ -269,7 +267,7 @@
     "lat": 2437.4981,
     "lng": 610.1679,
     "rating": 5,
-    "ratings": 627
+    "ratings": 6
   },
   {
     "abbr": "UBS",
@@ -277,7 +275,7 @@
     "lat": 1373.6078,
     "lng": 556.55779,
     "rating": 3,
-    "ratings": 915
+    "ratings": 9
   },
   {
     "abbr": "UBS (Secret)",
@@ -285,7 +283,7 @@
     "lat": 1440.1364,
     "lng": 520.85309,
     "rating": 1,
-    "ratings": 135
+    "ratings": 1
   },
   {
     "abbr": "RAI",
@@ -293,15 +291,14 @@
     "lat": 2024.5103,
     "lng": 993.01223,
     "rating": 1,
-    "ratings": 36
-  },
+    "ratings": 3  },
   {
     "abbr": "RAI (E)",
     "name": "Raitt Hall (East Entrance)",
     "lat": 2094.2987,
     "lng": 956.90276,
     "rating": 5,
-    "ratings": 304
+    "ratings": 3
   },
   {
     "abbr": "ROB",
@@ -309,7 +306,7 @@
     "lat": 2309.4107,
     "lng": 1979.0003,
     "rating": 1,
-    "ratings": 580
+    "ratings": 5
   },
   {
     "abbr": "CHL",
@@ -317,7 +314,7 @@
     "lat": 1707.6629,
     "lng": 1671.5098,
     "rating": 5,
-    "ratings": 208
+    "ratings": 2
   },
   {
     "abbr": "CHL (NE)",
@@ -325,7 +322,7 @@
     "lat": 1746.0487,
     "lng": 1672.52,
     "rating": 1,
-    "ratings": 109
+    "ratings": 1
   },
   {
     "abbr": "CHL (SE)",
@@ -333,7 +330,7 @@
     "lat": 1762.7162,
     "lng": 1708.8855,
     "rating": 5,
-    "ratings": 398
+    "ratings": 3
   },
   {
     "abbr": "IMA",
@@ -341,7 +338,7 @@
     "lat": 2722.3352,
     "lng": 1710.2859,
     "rating": 4,
-    "ratings": 829
+    "ratings": 8
   },
   {
     "abbr": "HUB",
@@ -349,7 +346,7 @@
     "lat": 2269.7856,
     "lng": 1364.3777,
     "rating": 1,
-    "ratings": 212
+    "ratings": 2
   },
   {
     "abbr": "HUB (West Food)",
@@ -357,7 +354,7 @@
     "lat": 2270.8682,
     "lng": 1388.1961,
     "rating": 3,
-    "ratings": 200
+    "ratings": 2
   },
   {
     "abbr": "HUB (South Food)",
@@ -365,7 +362,7 @@
     "lat": 2309.3025,
     "lng": 1450.4487,
     "rating": 4,
-    "ratings": 314
+    "ratings": 3
   },
   {
     "abbr": "MNY",
@@ -373,7 +370,7 @@
     "lat": 1684.1768,
     "lng": 1297.0716,
     "rating": 3,
-    "ratings": 280
+    "ratings": 2
   },
   {
     "abbr": "MNY (NW)",
@@ -381,7 +378,7 @@
     "lat": 1658.923,
     "lng": 1295.8089,
     "rating": 2,
-    "ratings": 849
+    "ratings": 8
   },
   {
     "abbr": "PAR",
@@ -389,7 +386,7 @@
     "lat": 1715.3571,
     "lng": 1060.4286,
     "rating": 5,
-    "ratings": 888
+    "ratings": 8
   },
   {
     "abbr": "MCM",
@@ -397,15 +394,14 @@
     "lat": 2446.9314,
     "lng": 898.06137,
     "rating": 4,
-    "ratings": 16
-  },
+    "ratings": 1  },
   {
     "abbr": "MCM (SW)",
     "name": "McMahon Hall (Southwest Entrance)",
     "lat": 2419.3153,
     "lng": 921.79995,
     "rating": 5,
-    "ratings": 692
+    "ratings": 6
   },
   {
     "abbr": "CMU",
@@ -413,6 +409,6 @@
     "lat": 2344.8512,
     "lng": 1114.6251,
     "rating": 5,
-    "ratings": 388
+    "ratings": 3
   }
 ]

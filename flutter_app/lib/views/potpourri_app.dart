@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/building.dart';
+import 'package:flutter_app/providers/campus_provider.dart';
 import 'package:flutter_app/providers/position_provider.dart';
 import 'package:flutter_app/views/building_card.dart';
+import 'package:flutter_app/views/building_entry_view.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
@@ -87,18 +90,32 @@ class _PotpourriAppState extends State<PotpourriApp> {
 
 /// Fills the drawer with the list of locations
 Widget _fillDrawer() {
-  var items = [];
+  return Consumer<CampusProvider>(builder: (context, campusProvider, child) {
+    List<Building> buildings = campusProvider.buildings;
+    return ListView.builder(
+        itemCount: buildings.length,
+        itemBuilder: (context, index) {
+          return BuildingCard(
+              name: buildings[index].name,
+              callBack: () => {_navigateToEntry(context, buildings[index])},
+              subtitle: buildings[index].abbr);
+        });
+  });
+}
 
-  for (int i = 0; i < 10; i++) {
-    items.add(BuildingCard(
-        name: 'Billy G. Center $i',
-        callBack: () => {print('Billy G. Center $i')}));
+// navigates user to the selected builing
+Future<void> _navigateToEntry(BuildContext context, Building building) async {
+  final newEntry = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => BuildingEntryView(building: building)));
+
+  if (!context.mounted) {
+    return;
   }
-  return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return items[index];
-      });
+
+  //final campusProvider = Provider.of<CampusProvider>(context, listen: false);
+  //campusProvider.upsertBuilding(newEntry);
 }
 
 /// Placeholder widget for the map in the main view

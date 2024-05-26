@@ -12,6 +12,7 @@ class Building {
   final double lat;
   final double lng;
   final int rating;
+  final List<String> reviews = ["This a review", "This is another review"];
 
   @JsonKey(name: 'ratings')
   final int ratingCount;
