@@ -17,7 +17,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
   double lat = 0.0;
   double lng = 0.0;
   int rating = 1;
-  int ratings = 0;
+  int ratingCount = 0;
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
     lat = widget.building.lat;
     lng = widget.building.lng;
     rating = widget.building.rating;
-    ratings = widget.building.ratingCount;
+    ratingCount = widget.building.ratingCount;
   }
 
   @override
@@ -89,13 +89,23 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                 ],
               ),
               Semantics(
-                label: '$ratings ratings',
+                label: '$ratingCount ratings',
                 child: Text(
-                  'Ratings: $ratings',
+                  'Ratings: $ratingCount',
                   style: const TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
-              )
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: widget.building.reviews.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(widget.building.reviews[index]),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -107,8 +117,8 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
   _popBack(BuildContext context) {
     /** rating should probably be a double */
     final newRating =
-        (ratings * widget.building.rating + rating) ~/ (ratings + 1);
-    final newRatings = ratings + 1;
+        (ratingCount * widget.building.rating + rating) ~/ (ratingCount + 1);
+    final newRatings = ratingCount + 1;
 
     Building updatedBuilding = Building.withUpdatedRatings(
         building: widget.building,

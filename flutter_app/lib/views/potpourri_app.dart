@@ -95,19 +95,25 @@ Widget _fillDrawer() {
     return ListView.builder(
         itemCount: buildings.length,
         itemBuilder: (context, index) {
-          return BuildingCard(name: buildings[index].name, callBack: () => {_navigateToEntry(context, buildings[index])});
+          return BuildingCard(
+              name: buildings[index].name,
+              callBack: () => {_navigateToEntry(context, buildings[index])},
+              subtitle: buildings[index].abbr);
         });
   });
 }
 
 // navigates user to the selected builing
 Future<void> _navigateToEntry(BuildContext context, Building building) async {
-  final newEntry = await Navigator.push(context, MaterialPageRoute(builder: (context) => BuildingEntryView(building: building)));
+  final newEntry = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => BuildingEntryView(building: building)));
 
-  if (!context.mounted){
+  if (!context.mounted) {
     return;
   }
-  
+
   //final campusProvider = Provider.of<CampusProvider>(context, listen: false);
   //campusProvider.upsertBuilding(newEntry);
 }
