@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter_app/models/review.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'building.g.dart';
@@ -12,7 +13,10 @@ class Building {
   final double lat;
   final double lng;
   final int rating;
-  final List<String> reviews = ["This a review", "This is another review"];
+  final List<Review> reviews = [
+    Review(review: "this is a review", rating: 5),
+    Review(review: "This is another review", rating: 3)
+  ];
 
   @JsonKey(name: 'ratings')
   final int ratingCount;

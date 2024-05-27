@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/building.dart';
+import 'package:flutter_app/models/review.dart';
+import 'package:flutter_app/views/review_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class BuildingEntryView extends StatefulWidget {
@@ -18,6 +20,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
   double lng = 0.0;
   int rating = 1;
   int ratingCount = 0;
+  List<Review> reviews = [];
 
   @override
   void initState() {
@@ -28,22 +31,32 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
     lng = widget.building.lng;
     rating = widget.building.rating;
     ratingCount = widget.building.ratingCount;
+    reviews = widget.building.reviews;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Semantics(
-          label: abbr,
+          label: name,
           child: Text(
             name,
             style: const TextStyle(fontWeight: FontWeight.w500),
           ),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () => {
+                    setState(() {
+                      reviews.add(Review());
+                    })
+                  },
+              icon: const Icon(Icons.add_comment_outlined)),
+        ],
       ),
-      resizeToAvoidBottomInset: false,
       body: PopScope(
         canPop: false,
         onPopInvoked: (didPop) {
@@ -100,9 +113,8 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                 child: ListView.builder(
                   itemCount: widget.building.reviews.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(widget.building.reviews[index]),
-                    );
+                    return ReviewWidget(
+                        review: widget.building.reviews[index], canEdit: true);
                   },
                 ),
               ),

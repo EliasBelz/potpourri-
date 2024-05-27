@@ -17,11 +17,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final buildings = await loadVenuesDB('lib/data/building_data.json');
-  print(buildings.all.length);
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => PositionProvider()),
-      ChangeNotifierProvider(create: (context) => CampusProvider(buildings: buildings.all))
+      ChangeNotifierProvider(
+          create: (context) => CampusProvider(buildings: buildings.all))
     ],
     child: const PotpourriApp(),
   ));
