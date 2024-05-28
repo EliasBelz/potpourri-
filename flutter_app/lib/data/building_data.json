@@ -4,231 +4,202 @@
     "name": "Bagley Hall",
     "lat": 47.653080733916376,
     "lng": -122.30867998995679,
-    "rating": 2,
-    "ratings": 333
+    "ratings": 0
   },
   {
     "abbr": "CSE1",
     "name": "Paul G. Allen Center for Computer Science & Engineering",
     "lat": 47.65334425420228,
     "lng": -122.30558811163986,
-    "rating": 4,
-    "ratings": 881
+    "ratings": 4
   },
   {
     "abbr": "CSE2",
     "name": "Bill & Melinda Gates Center For Computer Science & Engineering",
     "lat": 47.65315373737774,
     "lng": -122.30508038135868,
-    "rating": 4,
-    "ratings": 957
+    "ratings": 7
   },
   {
     "abbr": "DEN",
     "name": "Denny Hall",
     "lat": 47.658466021841484,
     "lng": -122.30879989670241,
-    "rating": 4,
-    "ratings": 183
+    "ratings": 2
   },
   {
     "abbr": "ECE",
     "name": "Electrical & Computer Engineering Building",
     "lat": 47.65367271461138,
     "lng": -122.3063685034487,
-    "rating": 5,
-    "ratings": 628
+    "ratings": 5
   },
   {
     "abbr": "GWN",
     "name": "Gowen Hall",
     "lat": 47.65651283110193,
     "lng": -122.30779362368649,
-    "rating": 2,
-    "ratings": 953
+    "ratings": 2
   },
   {
     "abbr": "KNE",
     "name": "Kane Hall",
     "lat": 47.656782643732036,
     "lng": -122.30910202368646,
-    "rating": 3,
-    "ratings": 497
+    "ratings": 6
   },
   {
     "abbr": "LOW",
     "name": "Loew Hall",
     "lat": 47.6544099406554,
     "lng": -122.3045282034486,
-    "rating": 1,
-    "ratings": 858
+    "ratings": 1
   },
   {
     "abbr": "MGH",
     "name": "Mary Gates Hall",
     "lat": 47.65514140236346,
     "lng": -122.3079880543747,
-    "rating": 2,
-    "ratings": 494
+    "ratings": 3
   },
   {
     "abbr": "MLR",
     "name": "Miller Hall",
     "lat": 47.6573310889623,
     "lng": -122.3063094390304,
-    "rating": 3,
-    "ratings": 894
+    "ratings": 2
   },
   {
     "abbr": "MOR",
     "name": "More Hall",
     "lat": 47.65280976619425,
     "lng": -122.30530313903071,
-    "rating": 2,
-    "ratings": 192
+    "ratings": 6
   },
   {
     "abbr": "MUS",
     "name": "Music Building",
     "lat": 47.65789408744295,
     "lng": -122.30597655437457,
-    "rating": 1,
-    "ratings": 719
+    "ratings": 5
   },
   {
     "abbr": "OUG",
     "name": "Odegaard Undergraduate Library",
     "lat": 47.65650947773534,
     "lng": -122.31036360344848,
-    "rating": 4,
-    "ratings": 201
+    "ratings": 3
   },
   {
     "abbr": "PAA",
     "name": "Physics/Astronomy Building A",
     "lat": 1625.2679,
     "lng": 1783.5181,
-    "rating": 1,
-    "ratings": 189
+    "ratings": 1
   },
   {
     "abbr": "PAB",
     "name": "Physics/Astronomy Building",
     "lat": 47.653109066049325,
     "lng": -122.31098922368668,
-    "rating": 1,
-    "ratings": 12
+    "ratings": 4
   },
   {
     "abbr": "SAV",
     "name": "Savery Hall",
     "lat": 47.65716786408359,
     "lng": -122.30836498135841,
-    "rating": 5,
-    "ratings": 425
+    "ratings": 5
   },
   {
     "abbr": "SUZ",
     "name": "Suzzallo Library",
     "lat": 47.655896639302675,
     "lng": -122.30785879670256,
-    "rating": 1,
-    "ratings": 269
+    "ratings": 5
   },
   {
     "abbr": "FSH",
     "name": "Fishery Sciences Building",
     "lat": 47.65313435751428,
     "lng": -122.3163466390308,
-    "rating": 4,
-    "ratings": 621
+    "ratings": 4
   },
   {
     "abbr": "MCC",
     "name": "McCarty Hall",
     "lat": 47.66077259715198,
     "lng": -122.3049947322843,
-    "rating": 2,
-    "ratings": 291
+    "ratings": 5
   },
   {
     "abbr": "UBS",
     "name": "University Bookstore",
     "lat": 47.660617566967844,
     "lng": -122.31283550078858,
-    "rating": 3,
-    "ratings": 915
+    "ratings": 3
   },
   {
     "abbr": "RAI",
     "name": "Raitt Hall (West Entrance)",
     "lat": 47.65796203818983,
     "lng": -122.30720661349194,
-    "rating": 1,
-    "ratings": 36
+    "ratings": 4
   },
   {
     "abbr": "ROB",
     "name": "Roberts Hall",
     "lat": 47.65206190061627,
     "lng": -122.3050604409321,
-    "rating": 1,
-    "ratings": 580
+    "ratings": 5
   },
   {
     "abbr": "CHL",
     "name": "Chemistry Library",
     "lat": 47.65369582533701,
     "lng": -122.30996758829936,
-    "rating": 5,
-    "ratings": 208
+    "ratings": 6
   },
   {
     "abbr": "IMA",
     "name": "Intramural Activities Building",
     "lat": 47.653597092910985,
     "lng": -122.30157098980011,
-    "rating": 4,
-    "ratings": 829
+    "ratings": 2
   },
   {
     "abbr": "HUB",
     "name": "Student Union Building",
     "lat": 47.65538704161994,
     "lng": -122.30508865517405,
-    "rating": 1,
-    "ratings": 212
+    "ratings": 5
   },
   {
     "abbr": "MNY",
     "name": "Meany Hall",
     "lat": 47.65527556117201,
     "lng": -122.31046698912232,
-    "rating": 3,
-    "ratings": 280
+    "ratings": 4
   },
   {
     "abbr": "PAR",
     "name": "Parrington Hall",
     "lat": 47.657418660196775,
     "lng": -122.31022887790996,
-    "rating": 5,
-    "ratings": 888
+    "ratings": 7
   },
   {
     "abbr": "MCM",
     "name": "McMahon Hall (Northwest Entrance)",
     "lat": 47.65820557418919,
     "lng": -122.30387252400632,
-    "rating": 4,
-    "ratings": 16
+    "ratings": 6
   },
   {
     "abbr": "CMU",
     "name": "Communications Building",
     "lat": 47.65702425778388,
     "lng": -122.30494726677962,
-    "rating": 5,
-    "ratings": 388
+    "ratings": 3
   }
 ]
