@@ -21,15 +21,19 @@ class PotpourriApp extends StatefulWidget {
 
 /// Companion state class for PotpourriApp
 class _PotpourriAppState extends State<PotpourriApp> {
+  late final MapController myMapController;
+
   /// Initializes the state of the PotpourriApp
   @override
   initState() {
+    myMapController = MapController();
     super.initState();
   }
 
   /// Disposes the state of the PotpourriApp
   @override
   dispose() {
+    myMapController.dispose();
     super.dispose();
   }
 
@@ -91,12 +95,32 @@ class _PotpourriAppState extends State<PotpourriApp> {
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.pink)),
                   ),
-                  _mapPlaceHolder(),
+                  Expanded(child: _createMap()),
                 ],
               );
             }),
           ),
         ));
+  }
+
+  // creates flutter map widget to display location
+  Widget _createMap() {
+    //47.65334425420228, -122.30558811163986 = allen center true latlong
+    return Center(
+      child: FlutterMap(
+          mapController: myMapController,
+          options: const MapOptions(
+            initialCenter: LatLng(47.65334425420228,
+                -122.30558811163986), // replace with location from provider
+            initialZoom: 17,
+          ),
+          children: [
+            TileLayer(
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              userAgentPackageName: 'dev.potpourri.example',
+            ),
+          ]),
+    );
   }
 }
 
@@ -149,23 +173,15 @@ Widget _mapPlaceHolder() {
               const SizedBox(width: 400, height: 600, child: Placeholder())));
 }
 
-/// Creates the map widget
-Widget _createMap() {
-  return FlutterMap(
-      options: const MapOptions(
-        initialCenter: LatLng(2315.0936, 1780.7913), // gates center :^)
-        initialZoom: 9.2,
-      ),
-      children: [
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.app',
-        ),
-        const RichAttributionWidget(attributions: [
-          TextSourceAttribution(
-            'OpenStreetMap contributors',
-            // onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
-          ),
-        ])
-      ]);
+// add building pins to map
+_addMapPins() {
+  // read buildings from file
+  // for each:
+  // pull out latlong for location of map pin and pass to createmappin
+  // return TileLayer (?) holding all pins
+}
+
+_createMapPin(lat, long) {
+  return Marker(child: Icon(Icons.pin), point: LatLng(lat, long));
+  // ontap: open building details view / reviews
 }
