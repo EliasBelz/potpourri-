@@ -1,6 +1,6 @@
 class Review {
   String review;
-  int rating;
+  double rating;
   bool canEdit;
 
   Review({this.review = "", this.rating = 0, this.canEdit = true});

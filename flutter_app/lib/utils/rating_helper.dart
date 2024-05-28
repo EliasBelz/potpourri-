@@ -14,18 +14,19 @@ List<Review> generateMockReviews(int count) {
 
   List<Review> reviews = [];
   for (int i = 0; i < count; i++) {
-    int randomRating = Random().nextInt(5) + 1;
+    double randomRating =
+        ((Random().nextDouble() * 4 + 1) * 2).roundToDouble() / 2;
     reviews.add(Review(
-        review: ratingMap[randomRating] ?? "Example review.",
+        review: ratingMap[randomRating.toInt()] ?? "Example review.",
         rating: randomRating,
         canEdit: false));
   }
   return reviews;
 }
 
-int avgRating(List<Review> reviews) {
+double avgRating(List<Review> reviews) {
   int numberOfValidReviews = 0;
-  int totalRating = 0;
+  double totalRating = 0;
   for (Review review in reviews) {
     if (review.rating == 0 || review.review == '') {
       continue;
@@ -33,8 +34,8 @@ int avgRating(List<Review> reviews) {
     totalRating += review.rating;
     numberOfValidReviews++;
   }
-  /** rating should probably be a double */
+  // round to nearest 0.5
   return numberOfValidReviews > 0
-      ? (totalRating / numberOfValidReviews).round()
-      : 0;
+      ? ((totalRating / numberOfValidReviews) * 2).roundToDouble() / 2
+      : 0.0;
 }

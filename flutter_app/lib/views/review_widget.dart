@@ -24,10 +24,10 @@ class _ReviewWidgetState extends State<ReviewWidget> {
         children: [
           RatingBar(
             ignoreGestures: !widget.review.canEdit,
-            initialRating: widget.review.rating.toDouble(),
+            initialRating: widget.review.rating,
             minRating: 1,
             maxRating: 5,
-            allowHalfRating: false,
+            allowHalfRating: true,
             itemSize: 30,
             ratingWidget: RatingWidget(
                 full: const Icon(Icons.star),
@@ -35,7 +35,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                 empty: const Icon(Icons.star_border)),
             onRatingUpdate: (newRating) {
               if (widget.review.canEdit) {
-                widget.review.rating = newRating.toInt();
+                widget.review.rating = newRating;
                 widget.onEdit();
               }
             },

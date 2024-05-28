@@ -13,7 +13,7 @@ class Building {
   final String _name;
   final double _lat;
   final double _lng;
-  final int _rating;
+  final double _rating;
   late final List<Review> _reviews;
   @JsonKey(name: 'ratings')
   final int _ratingCount;
@@ -27,7 +27,7 @@ class Building {
       required double lng,
       required int ratingCount}) {
     List<Review> reviews = generateMockReviews(ratingCount);
-    int rating = avgRating(reviews);
+    double rating = avgRating(reviews);
 
     return Building.all(
         abbr: abbr,
@@ -44,7 +44,7 @@ class Building {
     required String name,
     required double lat,
     required double lng,
-    required int rating,
+    required double rating,
     required int ratingCount,
     required List<Review> reviews,
   })  : _abbr = abbr,
@@ -78,7 +78,7 @@ class Building {
   String get name => _name;
   double get lat => _lat;
   double get lng => _lng;
-  int get rating => _rating;
+  double get rating => _rating;
   int get ratingCount => _ratingCount;
   List<Review> get reviews => List.from(_reviews);
 

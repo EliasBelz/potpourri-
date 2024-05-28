@@ -15,13 +15,13 @@ class BuildingEntryView extends StatefulWidget {
 }
 
 class _BuildingEntryViewState extends State<BuildingEntryView> {
-  String abbr = 'abbr';
-  String name = 'building';
-  double lat = 0.0;
-  double lng = 0.0;
-  int rating = 1;
-  int ratingCount = 0;
-  List<Review> reviews = [];
+  late String abbr;
+  late String name;
+  late double lat;
+  late double lng;
+  late double rating;
+  late int ratingCount;
+  late List<Review> reviews;
 
   @override
   void initState() {
@@ -88,17 +88,17 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                     label: '$rating stars',
                     child: RatingBar(
                       ignoreGestures: true,
-                      initialRating: rating.toDouble(),
+                      initialRating: rating,
                       minRating: 1,
                       maxRating: 5,
-                      allowHalfRating: false,
+                      allowHalfRating: true,
                       itemSize: 30,
                       ratingWidget: RatingWidget(
                           full: const Icon(Icons.star),
                           half: const Icon(Icons.star_half),
                           empty: const Icon(Icons.star_border)),
                       onRatingUpdate: (newRating) {
-                        rating = newRating.toInt();
+                        rating = newRating;
                       },
                     ),
                   )
