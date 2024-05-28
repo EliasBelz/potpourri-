@@ -3,18 +3,29 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../models/review.dart';
 
 class ReviewWidget extends StatefulWidget {
+  /// Current review to be displayed
   final Review review;
+
+  /// Function to be called when the review is edited
   final Function() onEdit;
 
+  /// Constructor
+  /// Parameters:
+  /// review (Review): The review to be displayed.
+  /// onEdit (Function): The function to be called when the review is edited.
   const ReviewWidget({required this.review, required this.onEdit, super.key});
 
+  /// Initiates state
   @override
   State<ReviewWidget> createState() => _ReviewWidgetState();
 }
 
+/// Companion state class for ReviewWidget
 class _ReviewWidgetState extends State<ReviewWidget> {
+  /// Controller for the text box
   late final TextEditingController myController;
 
+  /// Builds the widget
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +36,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
           RatingBar(
             ignoreGestures: !widget.review.canEdit,
             initialRating: widget.review.rating,
-            minRating: 1,
+            minRating: 0.5,
             maxRating: 5,
             allowHalfRating: true,
             itemSize: 30,

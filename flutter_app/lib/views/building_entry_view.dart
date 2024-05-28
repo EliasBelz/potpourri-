@@ -89,7 +89,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                     child: RatingBar(
                       ignoreGestures: true,
                       initialRating: rating,
-                      minRating: 1,
+                      minRating: 0.5,
                       maxRating: 5,
                       allowHalfRating: true,
                       itemSize: 30,

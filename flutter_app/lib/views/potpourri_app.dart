@@ -10,24 +10,30 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
+/// Main application widget
 class PotpourriApp extends StatefulWidget {
   const PotpourriApp({super.key});
 
+  /// Initializes the state of the PotpourriApp
   @override
   State<PotpourriApp> createState() => _PotpourriAppState();
 }
 
+/// Companion state class for PotpourriApp
 class _PotpourriAppState extends State<PotpourriApp> {
+  /// Initializes the state of the PotpourriApp
   @override
   initState() {
     super.initState();
   }
 
+  /// Disposes the state of the PotpourriApp
   @override
   dispose() {
     super.dispose();
   }
 
+  /// Builds the widget
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,12 +45,12 @@ class _PotpourriAppState extends State<PotpourriApp> {
               title: const Text('Potpourri 🚽'),
               actions: [
                 Consumer<CampusProvider>(
-                  builder: (context, campusProvider, child) {
-                    return IconButton(
-                        onPressed: () => {_imFeelingLucky(context, campusProvider)},
-                        icon: const Icon(Icons.pin_drop));
-                  }
-                ),
+                    builder: (context, campusProvider, child) {
+                  return IconButton(
+                      onPressed: () =>
+                          {_imFeelingLucky(context, campusProvider)},
+                      icon: const Icon(Icons.find_replace_outlined));
+                }),
               ],
             ),
             drawer: Drawer(
@@ -94,8 +100,8 @@ class _PotpourriAppState extends State<PotpourriApp> {
   }
 }
 
-// Navigates user to a random building.
-_imFeelingLucky(BuildContext context, CampusProvider campusProvider){
+/// Navigates user to a random building.
+_imFeelingLucky(BuildContext context, CampusProvider campusProvider) {
   final buildings = campusProvider.buildings;
   final randIndex = Random().nextInt(buildings.length);
   final randBuilding = buildings[randIndex];
@@ -117,7 +123,7 @@ Widget _fillDrawer() {
   });
 }
 
-// navigates user to the selected builing
+/// navigates user to the selected builing
 Future<void> _navigateToEntry(BuildContext context, Building building) async {
   final newEntry = await Navigator.push(
       context,
@@ -142,6 +148,7 @@ Widget _mapPlaceHolder() {
               const SizedBox(width: 400, height: 600, child: Placeholder())));
 }
 
+/// Creates the map widget
 Widget _createMap() {
   return FlutterMap(
       options: const MapOptions(
