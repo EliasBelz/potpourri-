@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_app/models/review.dart';
 import 'package:json_annotation/json_annotation.dart';
+import '../utils/rating_helper.dart';
 
 part 'building.g.dart';
 // https://docs.flutter.dev/data-and-backend/serialization/json
@@ -24,8 +25,10 @@ class Building {
       required String name,
       required double lat,
       required double lng,
-      required int rating,
       required int ratingCount}) {
+    List<Review> reviews = generateMockReviews(ratingCount);
+    int rating = avgRating(reviews);
+
     return Building.all(
         abbr: abbr,
         name: name,
@@ -33,17 +36,17 @@ class Building {
         lng: lng,
         rating: rating,
         ratingCount: ratingCount,
-        reviews: _generateMockReviews(ratingCount));
+        reviews: reviews);
   }
 
   Building.all({
-    required abbr,
-    required name,
-    required lat,
-    required lng,
-    required rating,
-    required ratingCount,
-    required reviews,
+    required String abbr,
+    required String name,
+    required double lat,
+    required double lng,
+    required int rating,
+    required int ratingCount,
+    required List<Review> reviews,
   })  : _abbr = abbr,
         _name = name,
         _lat = lat,
@@ -55,21 +58,13 @@ class Building {
   factory Building.withUpdatedReviews(
       {required Building building, required reviews}) {
     int numberOfReviews = reviews.length;
-    int avgRating = 0;
-    if (numberOfReviews > 0) {
-      int totalRating = 0;
-      for (Review review in reviews) {
-        totalRating += review.rating;
-      }
-      /** rating should probably be a double */
-      avgRating = (totalRating / numberOfReviews).round();
-    }
+
     return Building.all(
         abbr: building.abbr,
         name: building.name,
         lat: building.lat,
         lng: building.lng,
-        rating: avgRating,
+        rating: avgRating(reviews),
         ratingCount: numberOfReviews,
         reviews: reviews);
   }
@@ -105,25 +100,4 @@ class Building {
   num _squared(num x) {
     return x * x;
   }
-}
-
-/// Helper method for generating mock reviews
-List<Review> _generateMockReviews(int count) {
-  Map<int, String> ratingMap = {
-    1: "This place suxxxxxx broooooo",
-    2: "Bro what the heck is this place?",
-    3: "Idk if the tuition is worth it for this place",
-    4: "This place is pretty good, I guess",
-    5: "Very epic, I like it here"
-  };
-
-  List<Review> reviews = [];
-  for (int i = 0; i < count; i++) {
-    int randomRating = Random().nextInt(5) + 1;
-    reviews.add(Review(
-        review: ratingMap[randomRating] ?? "Example review.",
-        rating: randomRating,
-        canEdit: false));
-  }
-  return reviews;
 }

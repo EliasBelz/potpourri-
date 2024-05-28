@@ -4,8 +4,9 @@ import '../models/review.dart';
 
 class ReviewWidget extends StatefulWidget {
   final Review review;
+  final Function() onEdit;
 
-  const ReviewWidget({required this.review, super.key});
+  const ReviewWidget({required this.review, required this.onEdit, super.key});
 
   @override
   State<ReviewWidget> createState() => _ReviewWidgetState();
@@ -35,6 +36,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
             onRatingUpdate: (newRating) {
               if (widget.review.canEdit) {
                 widget.review.rating = newRating.toInt();
+                widget.onEdit();
               }
             },
           ),
@@ -45,6 +47,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
             maxLines: 5,
             onChanged: (text) {
               widget.review.review = myController.text;
+              widget.onEdit();
             },
             decoration: const InputDecoration(
               hintText: 'Enter your review here',

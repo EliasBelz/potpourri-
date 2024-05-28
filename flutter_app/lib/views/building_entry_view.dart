@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/building.dart';
 import 'package:flutter_app/models/review.dart';
+import 'package:flutter_app/utils/rating_helper.dart';
 import 'package:flutter_app/views/review_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -79,7 +80,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                   Semantics(
                     label: 'Rating',
                     child: const Text(
-                      'Rating: ',
+                      'Average Rating: ',
                       style: TextStyle(fontSize: 24),
                     ),
                   ),
@@ -106,7 +107,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
               Semantics(
                 label: '$ratingCount ratings',
                 child: Text(
-                  'Ratings: $ratingCount',
+                  'Number of Ratings: $ratingCount',
                   style: const TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
@@ -119,7 +120,13 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                   itemBuilder: (context, index) {
                     // Build in reverse so that the newest reviews are at the top
                     return ReviewWidget(
-                        review: reviews[reviews.length - 1 - index]);
+                      review: reviews[reviews.length - 1 - index],
+                      onEdit: () {
+                        setState(() {
+                          rating = avgRating(reviews);
+                        });
+                      },
+                    );
                   },
                 ),
               ),
