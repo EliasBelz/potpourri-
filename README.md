@@ -2,6 +2,9 @@
 
 Elias
 
+## Resources Used
+- Flutter Rating Bar: https://pub.dev/packages/flutter_rating_bar
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.

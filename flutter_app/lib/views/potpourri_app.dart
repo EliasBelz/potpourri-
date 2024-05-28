@@ -118,7 +118,8 @@ Widget _fillDrawer() {
           return BuildingCard(
               name: buildings[index].name,
               callBack: () => {_navigateToEntry(context, buildings[index])},
-              subtitle: buildings[index].abbr);
+              subtitle: buildings[index].abbr,
+              rating: buildings[index].rating,);
         });
   });
 }
