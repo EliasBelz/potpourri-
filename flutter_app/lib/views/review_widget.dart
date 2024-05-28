@@ -55,6 +55,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
             enabled: widget.review.canEdit,
             controller: myController,
             keyboardType: TextInputType.multiline,
+            style: TextStyle(color: Colors.black),
             maxLines: 5,
             onChanged: (text) {
               widget.review.review = myController.text;

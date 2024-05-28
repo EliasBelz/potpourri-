@@ -69,7 +69,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
           margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 168, 168, 168),
+              color: Color.fromARGB(255, 226, 218, 255),
               borderRadius: BorderRadius.circular(20)),
           alignment: Alignment.center,
           child: Column(
