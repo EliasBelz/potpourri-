@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'providers/position_provider.dart';
 
+/// Loads the building data from the given path
 Future<BuildingsDB> loadVenuesDB(String dataPath) async {
   return BuildingsDB.initializeFromJson(await rootBundle.loadString(dataPath));
 }
