@@ -12,8 +12,6 @@ Future<BuildingsDB> loadVenuesDB(String dataPath) async {
 }
 
 void main() async {
-  // TODO inti db here
-  // TODO init change notifier providers here
   WidgetsFlutterBinding.ensureInitialized();
 
   final buildings = await loadVenuesDB('lib/data/building_data.json');

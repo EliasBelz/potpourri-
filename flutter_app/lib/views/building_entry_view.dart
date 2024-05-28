@@ -52,6 +52,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
               onPressed: () => {
                     setState(() {
                       reviews.add(Review());
+                      ratingCount = reviews.length;
                     })
                   },
               icon: const Icon(Icons.add_comment_outlined)),
@@ -60,7 +61,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
       body: PopScope(
         canPop: false,
         onPopInvoked: (didPop) {
-          return didPop ? {} : _popBack(context);
+          didPop ? null : _popBack(context);
         },
         child: Container(
           width: double.infinity,
@@ -85,6 +86,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                   Semantics(
                     label: '$rating stars',
                     child: RatingBar(
+                      ignoreGestures: true,
                       initialRating: rating.toDouble(),
                       minRating: 1,
                       maxRating: 5,
@@ -111,10 +113,13 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: widget.building.reviews.length,
+                  /// This forces the list to rebuild when the length of the reviews changes
+                  key: ValueKey(reviews.length),
+                  itemCount: reviews.length,
                   itemBuilder: (context, index) {
+                    // Build in reverse so that the newest reviews are at the top
                     return ReviewWidget(
-                        review: widget.building.reviews[index], canEdit: true);
+                        review: reviews[reviews.length - 1 - index]);
                   },
                 ),
               ),
@@ -127,19 +132,15 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
 
   // pops out of view with new rating and an extra rating.
   _popBack(BuildContext context) {
-    /** rating should probably be a double */
-    final newRating =
-        (ratingCount * widget.building.rating + rating) ~/ (ratingCount + 1);
-    final newRatings = ratingCount + 1;
+    List<Review> newReviews = [];
+    for (Review review in reviews) {
+      if (review.review != "" && review.rating != 0) {
+        newReviews.add(review.noEditClone());
+      }
+    }
 
-    Building updatedBuilding = Building.withUpdatedRatings(
-        building: widget.building,
-        abbr: widget.building.abbr,
-        name: widget.building.name,
-        rating: newRating,
-        ratingCount: newRatings,
-        lat: widget.building.lat,
-        lng: widget.building.lng);
+    Building updatedBuilding = Building.withUpdatedReviews(
+        building: widget.building, reviews: newReviews);
 
     Navigator.pop(context, updatedBuilding);
   }

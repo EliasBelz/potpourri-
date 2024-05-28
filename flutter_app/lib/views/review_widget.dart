@@ -4,9 +4,8 @@ import '../models/review.dart';
 
 class ReviewWidget extends StatefulWidget {
   final Review review;
-  final canEdit;
 
-  const ReviewWidget({required this.review, this.canEdit = true, super.key});
+  const ReviewWidget({required this.review, super.key});
 
   @override
   State<ReviewWidget> createState() => _ReviewWidgetState();
@@ -23,6 +22,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RatingBar(
+            ignoreGestures: !widget.review.canEdit,
             initialRating: widget.review.rating.toDouble(),
             minRating: 1,
             maxRating: 5,
@@ -33,13 +33,13 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                 half: const Icon(Icons.star_half),
                 empty: const Icon(Icons.star_border)),
             onRatingUpdate: (newRating) {
-              if (widget.canEdit) {
+              if (widget.review.canEdit) {
                 widget.review.rating = newRating.toInt();
               }
             },
           ),
           TextField(
-            enabled: widget.canEdit,
+            enabled: widget.review.canEdit,
             controller: myController,
             keyboardType: TextInputType.multiline,
             maxLines: 5,

@@ -61,7 +61,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
                       ),
                     ),
                     const Text(
-                        'Cannot find location data. Please make sure location services are enabled!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \nand try again later ;)',
+                        'Cannot find location data. Please make sure location services are enabled! \n Or try again later ;)',
                         semanticsLabel:
                             'Cannot find location data. Please make sure location services are enabled and try again later.',
                         style: TextStyle(
@@ -114,8 +114,8 @@ Future<void> _navigateToEntry(BuildContext context, Building building) async {
     return;
   }
 
-  //final campusProvider = Provider.of<CampusProvider>(context, listen: false);
-  //campusProvider.upsertBuilding(newEntry);
+  final campusProvider = Provider.of<CampusProvider>(context, listen: false);
+  campusProvider.upsertBuilding(newEntry);
 }
 
 /// Placeholder widget for the map in the main view
