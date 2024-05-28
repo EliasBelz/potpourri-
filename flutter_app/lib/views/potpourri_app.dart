@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/building.dart';
 import 'package:flutter_app/providers/campus_provider.dart';
@@ -36,9 +38,13 @@ class _PotpourriAppState extends State<PotpourriApp> {
             appBar: AppBar(
               title: const Text('Potpourri 🚽'),
               actions: [
-                IconButton(
-                    onPressed: () => {print("pin icon")},
-                    icon: const Icon(Icons.pin_drop)),
+                Consumer<CampusProvider>(
+                  builder: (context, campusProvider, child) {
+                    return IconButton(
+                        onPressed: () => {_imFeelingLucky(context, campusProvider)},
+                        icon: const Icon(Icons.pin_drop));
+                  }
+                ),
               ],
             ),
             drawer: Drawer(
@@ -86,6 +92,14 @@ class _PotpourriAppState extends State<PotpourriApp> {
           ),
         ));
   }
+}
+
+// Navigates user to a random building.
+_imFeelingLucky(BuildContext context, CampusProvider campusProvider){
+  final buildings = campusProvider.buildings;
+  final randIndex = Random().nextInt(buildings.length);
+  final randBuilding = buildings[randIndex];
+  _navigateToEntry(context, randBuilding);
 }
 
 /// Fills the drawer with the list of locations
