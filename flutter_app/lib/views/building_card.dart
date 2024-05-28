@@ -18,7 +18,7 @@ class BuildingCard extends StatelessWidget {
             splashColor: Colors.amber,
             onTap: callBack,
             child: ListTile(
-              leading: Icon(Icons.house_outlined),
+              leading: const Icon(Icons.house_outlined),
               title: Text(name),
               subtitle: Text(subtitle),
             )));

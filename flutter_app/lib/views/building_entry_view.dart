@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/building.dart';
+import 'package:flutter_app/models/review.dart';
+import 'package:flutter_app/utils/rating_helper.dart';
+import 'package:flutter_app/views/review_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class BuildingEntryView extends StatefulWidget {
@@ -12,12 +15,13 @@ class BuildingEntryView extends StatefulWidget {
 }
 
 class _BuildingEntryViewState extends State<BuildingEntryView> {
-  String abbr = 'abbr';
-  String name = 'building';
-  double lat = 0.0;
-  double lng = 0.0;
-  int rating = 1;
-  int ratingCount = 0;
+  late String abbr;
+  late String name;
+  late double lat;
+  late double lng;
+  late double rating;
+  late int ratingCount;
+  late List<Review> reviews;
 
   @override
   void initState() {
@@ -28,26 +32,37 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
     lng = widget.building.lng;
     rating = widget.building.rating;
     ratingCount = widget.building.ratingCount;
+    reviews = widget.building.reviews;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Semantics(
-          label: abbr,
+          label: name,
           child: Text(
             name,
             style: const TextStyle(fontWeight: FontWeight.w500),
           ),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () => {
+                    setState(() {
+                      reviews.add(Review());
+                      ratingCount = reviews.length;
+                    })
+                  },
+              icon: const Icon(Icons.add_comment_outlined)),
+        ],
       ),
-      resizeToAvoidBottomInset: false,
       body: PopScope(
         canPop: false,
         onPopInvoked: (didPop) {
-          return didPop ? {} : _popBack(context);
+          didPop ? null : _popBack(context);
         },
         child: Container(
           width: double.infinity,
@@ -65,24 +80,25 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                   Semantics(
                     label: 'Rating',
                     child: const Text(
-                      'Rating: ',
+                      'Average Rating: ',
                       style: TextStyle(fontSize: 24),
                     ),
                   ),
                   Semantics(
                     label: '$rating stars',
                     child: RatingBar(
-                      initialRating: rating.toDouble(),
+                      ignoreGestures: true,
+                      initialRating: rating,
                       minRating: 1,
                       maxRating: 5,
-                      allowHalfRating: false,
+                      allowHalfRating: true,
                       itemSize: 30,
                       ratingWidget: RatingWidget(
                           full: const Icon(Icons.star),
                           half: const Icon(Icons.star_half),
                           empty: const Icon(Icons.star_border)),
                       onRatingUpdate: (newRating) {
-                        rating = newRating.toInt();
+                        rating = newRating;
                       },
                     ),
                   )
@@ -91,17 +107,25 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
               Semantics(
                 label: '$ratingCount ratings',
                 child: Text(
-                  'Ratings: $ratingCount',
+                  'Number of Ratings: $ratingCount',
                   style: const TextStyle(fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: widget.building.reviews.length,
+                  /// This forces the list to rebuild when the length of the reviews changes
+                  key: ValueKey(reviews.length),
+                  itemCount: reviews.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(widget.building.reviews[index]),
+                    // Build in reverse so that the newest reviews are at the top
+                    return ReviewWidget(
+                      review: reviews[reviews.length - 1 - index],
+                      onEdit: () {
+                        setState(() {
+                          rating = avgRating(reviews);
+                        });
+                      },
                     );
                   },
                 ),
@@ -115,19 +139,15 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
 
   // pops out of view with new rating and an extra rating.
   _popBack(BuildContext context) {
-    /** rating should probably be a double */
-    final newRating =
-        (ratingCount * widget.building.rating + rating) ~/ (ratingCount + 1);
-    final newRatings = ratingCount + 1;
+    List<Review> newReviews = [];
+    for (Review review in reviews) {
+      if (review.review != "" && review.rating != 0) {
+        newReviews.add(review.noEditClone());
+      }
+    }
 
-    Building updatedBuilding = Building.withUpdatedRatings(
-        building: widget.building,
-        abbr: widget.building.abbr,
-        name: widget.building.name,
-        rating: newRating,
-        ratingCount: newRatings,
-        lat: widget.building.lat,
-        lng: widget.building.lng);
+    Building updatedBuilding = Building.withUpdatedReviews(
+        building: widget.building, reviews: newReviews);
 
     Navigator.pop(context, updatedBuilding);
   }

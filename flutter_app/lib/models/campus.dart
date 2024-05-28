@@ -2,7 +2,7 @@
 import 'package:flutter_app/models/building.dart';
 
 class Campus {
-  List<Building> _buildings;
+  final List<Building> _buildings;
 
   Campus({required List<Building> buildings}) : _buildings = buildings;
 
