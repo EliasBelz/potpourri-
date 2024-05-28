@@ -106,21 +106,19 @@ class _PotpourriAppState extends State<PotpourriApp> {
   // creates flutter map widget to display location
   Widget _createMap() {
     //47.65334425420228, -122.30558811163986 = allen center true latlong
-    return Center(
-      child: FlutterMap(
-          mapController: myMapController,
-          options: const MapOptions(
-            initialCenter: LatLng(47.65334425420228,
-                -122.30558811163986), // replace with location from provider
-            initialZoom: 17,
+    return FlutterMap(
+        mapController: myMapController,
+        options: const MapOptions(
+          initialCenter: LatLng(47.65334425420228,
+              -122.30558811163986), // replace with location from provider
+          initialZoom: 17,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'dev.potpourri.example',
           ),
-          children: [
-            TileLayer(
-              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              userAgentPackageName: 'dev.potpourri.example',
-            ),
-          ]),
-    );
+        ]);
   }
 }
 
@@ -140,10 +138,11 @@ Widget _fillDrawer() {
         itemCount: buildings.length,
         itemBuilder: (context, index) {
           return BuildingCard(
-              name: buildings[index].name,
-              callBack: () => {_navigateToEntry(context, buildings[index])},
-              subtitle: buildings[index].abbr,
-              rating: buildings[index].rating,);
+            name: buildings[index].name,
+            callBack: () => {_navigateToEntry(context, buildings[index])},
+            subtitle: buildings[index].abbr,
+            rating: buildings[index].rating,
+          );
         });
   });
 }
