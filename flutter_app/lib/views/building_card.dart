@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+/// Represents a BuildinCard widget. 
 class BuildingCard extends StatelessWidget {
   final String name;
   final VoidCallback callBack;
   final String subtitle;
   final double rating;
+
+  /// Constructs a BuildingCard given a name, onTap callback function, subtitle, and rating.
   const BuildingCard(
       {required this.name,
       required this.callBack,
@@ -13,6 +16,7 @@ class BuildingCard extends StatelessWidget {
       required this.rating,
       super.key});
 
+  /// Builds the BuildingCard widget.
   @override
   Widget build(BuildContext context) {
     return Card(

@@ -7,15 +7,19 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
+/// Represents a BuildingEntryView.
 class BuildingEntryView extends StatefulWidget {
   final Building building;
 
+  /// Constructs a BuildingEntryView given a building.
   const BuildingEntryView({super.key, required this.building});
 
+  /// Initializes the state of the BuildingEntryView.
   @override
   State<BuildingEntryView> createState() => _BuildingEntryViewState();
 }
 
+/// Companion state class for BuildingEntryView.
 class _BuildingEntryViewState extends State<BuildingEntryView> {
   late String abbr;
   late String name;
@@ -38,6 +42,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
     reviews = widget.building.reviews;
   }
 
+  /// constructs the BuildingEntryView widget.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,7 +158,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
     );
   }
 
-  // pops out of view with new rating and an extra rating.
+  /// Pops out of view with updating the building with a new rating.
   _popBack(BuildContext context) {
     List<Review> newReviews = [];
     for (Review review in reviews) {

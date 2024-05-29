@@ -7,6 +7,7 @@ import '../utils/rating_helper.dart';
 part 'building.g.dart';
 // https://docs.flutter.dev/data-and-backend/serialization/json
 
+/// Represents a campus building.
 @JsonSerializable()
 class Building {
   final String _abbr;
@@ -18,8 +19,8 @@ class Building {
   @JsonKey(name: 'ratings')
   final int _ratingCount;
 
-  /// Constructors
-
+  /// Constructs a building with mock reviews given an abbreviation, name, 
+  /// latitute, longitude, and rating count.
   factory Building(
       {required String abbr,
       required String name,
@@ -39,6 +40,8 @@ class Building {
         reviews: reviews);
   }
 
+  /// Constructs a building given an abbreviation, name, latitute, 
+  /// longitude, raitng, rating count, and list of reviews.
   Building.all({
     required String abbr,
     required String name,
@@ -55,6 +58,7 @@ class Building {
         _ratingCount = ratingCount,
         _reviews = reviews;
 
+  /// Constructs an updated building given a buildind to update and an updated list of reviews. 
   factory Building.withUpdatedReviews(
       {required Building building, required reviews}) {
     int numberOfReviews = reviews.length;
@@ -69,8 +73,11 @@ class Building {
         reviews: reviews);
   }
 
+  /// Constructs a building given json.
   factory Building.fromJson(Map<String, dynamic> json) =>
       _$BuildingFromJson(json);
+
+  /// Returns building as json.
   Map<String, dynamic> toJson() => _$BuildingToJson(this);
 
   /// Getters
@@ -84,7 +91,7 @@ class Building {
 
   /// Instance Methods
 
-  /// From food finder TODO cite in readme
+  /// Returns the distance from the given latitude/longitude to the building.
   double distanceFrom({required double lat, required double lng}) {
     // pythagorean theorem
     double a = this.lat - lat;
@@ -93,10 +100,12 @@ class Building {
     return c;
   }
 
+  /// Returns the distance in meters from the given latitude/longitude to the building.
   double distanceInMeters({required double lat, required double lng}) {
     return 111139 * distanceFrom(lat: lat, lng: lng);
   }
 
+  /// Returns x^2
   num _squared(num x) {
     return x * x;
   }

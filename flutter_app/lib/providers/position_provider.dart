@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
+/// Represents a provider that stores position information
 class PositionProvider extends ChangeNotifier {
   double? latitude;
   double? longitude;
   late Timer _updateTimer;
 
+  /// Constructs a PositionProvider
   PositionProvider() {
     _updateTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       await updatePosition();
@@ -54,7 +56,8 @@ class PositionProvider extends ChangeNotifier {
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
   }
-
+  
+  /// Updates the current position
   Future<void> updatePosition() async {
     // Update weather if its available if not set lat/lon to null signifying
     // that we don't have a location
@@ -69,7 +72,7 @@ class PositionProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
+  
   @override
   void dispose() {
     _updateTimer.cancel();

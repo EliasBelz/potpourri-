@@ -145,6 +145,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
         ));
   }
 
+  /// Centers the map on the user's position with the given position provider
   _centerMap(PositionProvider positionProvider) {
     if (positionProvider.latitude != null &&
         positionProvider.longitude != null) {
