@@ -25,20 +25,10 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
   late int ratingCount;
   late List<Review> reviews;
 
-  late final MapController myMapController;
-
-  // /// Disposes the state of the building entry
-  // @override
-  // dispose() {
-  //   myMapController.dispose();
-  //   super.dispose();
-  // }
-
   /// initializes state of building entry
   @override
   void initState() {
     super.initState();
-    myMapController = MapController();
     abbr = widget.building.abbr;
     name = widget.building.name;
     lat = widget.building.lat;
@@ -88,8 +78,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
           child: Column(
             children: [
               Expanded(
-                child: _createMap(widget.building.lat, widget.building.lng)
-              ),
+                  child: _createMap(widget.building.lat, widget.building.lng)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -173,20 +162,33 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
     //47.65334425420228, -122.30558811163986 = allen center true latlong
     return Center(
       child: FlutterMap(
-          mapController: myMapController,
           options: MapOptions(
-            initialCenter:
-              LatLng( // replace with given building latlong
-                lat,
-                long
-              ),
-            initialZoom: 18,
+            initialCenter: LatLng(lat, long),
+            initialZoom: 17,
           ),
           children: [
             TileLayer(
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'dev.potpourri.example',
             ),
+            MarkerLayer(markers: [
+              Marker(
+                  point: LatLng(lat, lng),
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 7, 139, 211),
+                        borderRadius: BorderRadius.circular(10), // Add rounding
+                        border: Border.all(
+                            color: Colors.black, width: 2), // Add border
+                      ),
+                      child: const Center(
+                          child: Text(
+                        '🚽',
+                        style: TextStyle(
+                          fontSize: 19.0, // Set font size
+                        ),
+                      ))))
+            ])
           ]),
     );
   }
