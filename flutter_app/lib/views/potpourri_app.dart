@@ -139,11 +139,16 @@ class _PotpourriAppState extends State<PotpourriApp> {
                         positionProvider.longitude!),
                     width: 80,
                     height: 80,
-                    child: const Icon(
-                      Icons.person_pin_circle_rounded,
-                      color: Color.fromARGB(255, 245, 199, 31),
-                      size: 70
-                    )),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 5, color: Color.fromARGB(255, 255, 200, 0))
+                      ), 
+                      child: const Icon(
+                        Icons.person_pin_circle_rounded,
+                        color: Color.fromARGB(255, 245, 199, 31),
+                        size: 70
+                    ))),
                 ..._addMapPins(context)
             ],
             )
@@ -166,7 +171,7 @@ _addMapPins(BuildContext context) {
       Provider.of<CampusProvider>(context, listen: false).buildings;
   final out = [];
   for (final building in buildings) {
-    Color color = Color.fromARGB(255, 198, 202, 255);
+    Color color = Color.fromARGB(255, 148, 185, 255);
     out.add(Marker(
       point: LatLng(building.lat, building.lng),
       width: 60,
