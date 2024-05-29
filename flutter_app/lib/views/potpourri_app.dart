@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app/models/building.dart';
 import 'package:flutter_app/providers/campus_provider.dart';
 import 'package:flutter_app/providers/position_provider.dart';
@@ -21,6 +22,8 @@ class PotpourriApp extends StatefulWidget {
 
 /// Companion state class for PotpourriApp
 class _PotpourriAppState extends State<PotpourriApp> {
+  double? initialLat;
+  double? initialLng;
   late final MapController myMapController;
 
   /// Initializes the state of the PotpourriApp
@@ -44,7 +47,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: Scaffold(
-            backgroundColor: const Color.fromARGB(255, 19, 0, 46),
+            backgroundColor: Colors.white,
             appBar: AppBar(
               title: const Text('Potpourri 🚽'),
               actions: [
@@ -83,42 +86,60 @@ class _PotpourriAppState extends State<PotpourriApp> {
                         style: TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
-                            color: Colors.pink)),
+                            color: Colors.black)),
+                  ],
+                );
+              } else {
+                return Column(
+                  children: [
+                    Center(
+                      child: Text(
+                          'Latitude: ${positionProvider.latitude!.toStringAsFixed(4)} Longitude: ${positionProvider.longitude!.toStringAsFixed(4)}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                    ),
+                    Expanded(child: _createMap(positionProvider, context)),
                   ],
                 );
               }
-              return Column(
-                children: [
-                  Center(
-                    child: Text(
-                        'Latitude: ${positionProvider.latitude!.toStringAsFixed(4)} Longitude: ${positionProvider.longitude!.toStringAsFixed(4)}',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.pink)),
-                  ),
-                  Expanded(child: _createMap()),
-                ],
-              );
             }),
           ),
         ));
   }
 
   // creates flutter map widget to display location
-  Widget _createMap() {
+  Widget _createMap(PositionProvider positionProvider, context) {
     //47.65334425420228, -122.30558811163986 = allen center true latlong
+    if (initialLat == null || initialLng == null) {
+      initialLat = positionProvider.latitude;
+      initialLng = positionProvider.longitude;
+    }
     return Center(
       child: FlutterMap(
           mapController: myMapController,
-          options: const MapOptions(
-            initialCenter: LatLng(47.65334425420228,
-                -122.30558811163986), // replace with location from provider
-            initialZoom: 17,
+          options: MapOptions(
+            initialCenter: LatLng(initialLat!,
+                initialLng!), // replace with location from provider
+            initialZoom: 16,
           ),
           children: [
             TileLayer(
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'dev.potpourri.example',
             ),
+            MarkerLayer(
+              markers: [
+                Marker(
+                    point: LatLng(positionProvider.latitude!,
+                        positionProvider.longitude!),
+                    child: const Icon(
+                      Icons.person_pin_circle_rounded,
+                      color: Color.fromARGB(255, 245, 199, 31),
+                    )),
+                ..._addMapPins(context)
+              ],
+            )
           ]),
     );
   }
@@ -132,6 +153,52 @@ _imFeelingLucky(BuildContext context, CampusProvider campusProvider) {
   _navigateToEntry(context, randBuilding);
 }
 
+// add building pins to map
+_addMapPins(BuildContext context) {
+  final buildings =
+      Provider.of<CampusProvider>(context, listen: false).buildings;
+  final out = [];
+  for (final building in buildings) {
+    Color color = Color.fromARGB(255, 7, 139, 211);
+    out.add(Marker(
+      point: LatLng(building.lat, building.lng),
+      child: Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(10), // Add rounding
+          border: Border.all(color: Colors.black, width: 2), // Add border
+        ),
+        child: Material(
+          clipBehavior: Clip.hardEdge,
+          color: Colors.transparent,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: InkWell(
+              splashColor: Color.fromARGB(255, 245, 199, 31),
+              onTap: () {
+                Future.delayed(Duration(milliseconds: 300), () {
+                  _navigateToEntry(context, building);
+                });
+              },
+              child: const Center(
+                child: Text(
+                  '🚽',
+                  style: TextStyle(
+                    fontSize: 19.0, // Set font size
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ));
+  }
+
+  return out;
+}
+
 /// Fills the drawer with the list of locations
 Widget _fillDrawer() {
   return Consumer<CampusProvider>(builder: (context, campusProvider, child) {
@@ -140,10 +207,15 @@ Widget _fillDrawer() {
         itemCount: buildings.length,
         itemBuilder: (context, index) {
           return BuildingCard(
-              name: buildings[index].name,
-              callBack: () => {_navigateToEntry(context, buildings[index])},
-              subtitle: buildings[index].abbr,
-              rating: buildings[index].rating,);
+            name: buildings[index].name,
+            callBack: () => {
+              Future.delayed(Duration(milliseconds: 300), () {
+                _navigateToEntry(context, buildings[index]);
+              })
+            },
+            subtitle: buildings[index].abbr,
+            rating: buildings[index].rating,
+          );
         });
   });
 }
@@ -161,27 +233,4 @@ Future<void> _navigateToEntry(BuildContext context, Building building) async {
 
   final campusProvider = Provider.of<CampusProvider>(context, listen: false);
   campusProvider.upsertBuilding(newEntry);
-}
-
-/// Placeholder widget for the map in the main view
-Widget _mapPlaceHolder() {
-  return Center(
-      child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 5.0)),
-          child:
-              const SizedBox(width: 400, height: 600, child: Placeholder())));
-}
-
-// add building pins to map
-_addMapPins() {
-  // read buildings from file
-  // for each:
-  // pull out latlong for location of map pin and pass to createmappin
-  // return TileLayer (?) holding all pins
-}
-
-_createMapPin(lat, long) {
-  return Marker(child: Icon(Icons.pin), point: LatLng(lat, long));
-  // ontap: open building details view / reviews
 }

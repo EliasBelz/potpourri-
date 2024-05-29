@@ -4,6 +4,8 @@ import 'package:flutter_app/models/review.dart';
 import 'package:flutter_app/utils/rating_helper.dart';
 import 'package:flutter_app/views/review_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class BuildingEntryView extends StatefulWidget {
   final Building building;
@@ -23,6 +25,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
   late int ratingCount;
   late List<Review> reviews;
 
+  /// initializes state of building entry
   @override
   void initState() {
     super.initState();
@@ -69,11 +72,13 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
           margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 226, 218, 255),
+              color: Color.fromARGB(255, 224, 218, 255),
               borderRadius: BorderRadius.circular(20)),
           alignment: Alignment.center,
           child: Column(
             children: [
+              Expanded(
+                  child: _createMap(widget.building.lat, widget.building.lng)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -150,5 +155,41 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
         building: widget.building, reviews: newReviews);
 
     Navigator.pop(context, updatedBuilding);
+  }
+
+  // creates flutter map widget to display location of given building
+  Widget _createMap(lat, long) {
+    //47.65334425420228, -122.30558811163986 = allen center true latlong
+    return Center(
+      child: FlutterMap(
+          options: MapOptions(
+            initialCenter: LatLng(lat, long),
+            initialZoom: 17,
+          ),
+          children: [
+            TileLayer(
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              userAgentPackageName: 'dev.potpourri.example',
+            ),
+            MarkerLayer(markers: [
+              Marker(
+                  point: LatLng(lat, lng),
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 7, 139, 211),
+                        borderRadius: BorderRadius.circular(10), // Add rounding
+                        border: Border.all(
+                            color: Colors.black, width: 2), // Add border
+                      ),
+                      child: const Center(
+                          child: Text(
+                        '🚽',
+                        style: TextStyle(
+                          fontSize: 19.0, // Set font size
+                        ),
+                      ))))
+            ])
+          ]),
+    );
   }
 }

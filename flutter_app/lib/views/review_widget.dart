@@ -33,37 +33,43 @@ class _ReviewWidgetState extends State<ReviewWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RatingBar(
-            ignoreGestures: !widget.review.canEdit,
-            initialRating: widget.review.rating,
-            minRating: 0.5,
-            maxRating: 5,
-            allowHalfRating: true,
-            itemSize: 30,
-            ratingWidget: RatingWidget(
-                full: const Icon(Icons.star),
-                half: const Icon(Icons.star_half),
-                empty: const Icon(Icons.star_border)),
-            onRatingUpdate: (newRating) {
-              if (widget.review.canEdit) {
-                widget.review.rating = newRating;
-                widget.onEdit();
-              }
-            },
+          Padding(
+            padding: const EdgeInsets.only(bottom: 2),
+            child: RatingBar(
+              ignoreGestures: !widget.review.canEdit,
+              initialRating: widget.review.rating,
+              minRating: 0.5,
+              maxRating: 5,
+              allowHalfRating: true,
+              itemSize: 30,
+              ratingWidget: RatingWidget(
+                  full: const Icon(Icons.star),
+                  half: const Icon(Icons.star_half),
+                  empty: const Icon(Icons.star_border)),
+              onRatingUpdate: (newRating) {
+                if (widget.review.canEdit) {
+                  widget.review.rating = newRating;
+                  widget.onEdit();
+                }
+              },
+            ),
           ),
           TextField(
             enabled: widget.review.canEdit,
             controller: myController,
             keyboardType: TextInputType.multiline,
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
             maxLines: 5,
             onChanged: (text) {
               widget.review.review = myController.text;
               widget.onEdit();
             },
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Enter your review here',
-              border: OutlineInputBorder(),
+              label: widget.review.canEdit
+                  ? null
+                  : const Text('Left by verified user'),
+              border: const OutlineInputBorder(),
             ),
           ),
         ],
