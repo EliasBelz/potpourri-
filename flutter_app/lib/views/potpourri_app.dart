@@ -44,7 +44,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: Scaffold(
-            backgroundColor: const Color.fromARGB(255, 19, 0, 46),
+            backgroundColor: Colors.white,
             appBar: AppBar(
               title: const Text('Potpourri 🚽'),
               actions: [
@@ -83,7 +83,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
                         style: TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
-                            color: Colors.pink)),
+                            color: Colors.black)),
                   ],
                 );
               }
@@ -93,7 +93,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
                     child: Text(
                         'Latitude: ${positionProvider.latitude!.toStringAsFixed(4)} Longitude: ${positionProvider.longitude!.toStringAsFixed(4)}',
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.pink)),
+                            fontWeight: FontWeight.bold, color: Colors.black)),
                   ),
                   Expanded(child: _createMap()),
                 ],
@@ -112,7 +112,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
           options: const MapOptions(
             initialCenter: LatLng(47.65334425420228,
                 -122.30558811163986), // replace with location from provider
-            initialZoom: 17,
+            initialZoom: 16,
           ),
           children: [
             TileLayer(
