@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app/helpers/weather_checker.dart';
 import 'package:flutter_app/models/building.dart';
 import 'package:flutter_app/providers/campus_provider.dart';
@@ -157,6 +158,19 @@ class _PotpourriAppState extends State<PotpourriApp> {
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'dev.potpourri.example',
             ),
+            LogoSourceAttribution(Consumer<WeatherProvider>(
+                builder: (context, weatherProvider, child) {
+              return Container(
+                color: const Color.fromARGB(255, 77, 161, 230),
+                child: SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Text(
+                    'Current Temperature ${weatherProvider.tempInFarenheit} °F',
+                  ),
+                ),
+              );
+            })),
             MarkerLayer(
               markers: [
                 Marker(
