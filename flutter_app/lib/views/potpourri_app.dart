@@ -47,7 +47,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: const Color.fromARGB(255, 198, 202, 255),
             appBar: AppBar(
               centerTitle: true,
               title: const Text('Potpourri 🚽'),
@@ -137,12 +137,15 @@ class _PotpourriAppState extends State<PotpourriApp> {
                 Marker(
                     point: LatLng(positionProvider.latitude!,
                         positionProvider.longitude!),
+                    width: 80,
+                    height: 80,
                     child: const Icon(
                       Icons.person_pin_circle_rounded,
                       color: Color.fromARGB(255, 245, 199, 31),
+                      size: 70
                     )),
                 ..._addMapPins(context)
-              ],
+            ],
             )
           ]),
     );
@@ -163,9 +166,11 @@ _addMapPins(BuildContext context) {
       Provider.of<CampusProvider>(context, listen: false).buildings;
   final out = [];
   for (final building in buildings) {
-    Color color = Color.fromARGB(255, 7, 139, 211);
+    Color color = Color.fromARGB(255, 198, 202, 255);
     out.add(Marker(
       point: LatLng(building.lat, building.lng),
+      width: 60,
+      height: 60,
       child: Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
@@ -176,8 +181,8 @@ _addMapPins(BuildContext context) {
         child: Material(
           clipBehavior: Clip.hardEdge,
           color: Colors.transparent,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+          child: Container(width: 60, height: 60, child: ClipRRect(
+            borderRadius: BorderRadius.circular(6),
             child: InkWell(
               splashColor: Color.fromARGB(255, 245, 199, 31),
               onTap: () {
@@ -189,12 +194,12 @@ _addMapPins(BuildContext context) {
                 child: Text(
                   '🚽',
                   style: TextStyle(
-                    fontSize: 19.0, // Set font size
+                    fontSize: 32.0, // Set font size
                   ),
                 ),
               ),
             ),
-          ),
+          )),
         ),
       ),
     ));
