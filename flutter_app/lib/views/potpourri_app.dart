@@ -1,10 +1,11 @@
+import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_app/helpers/weather_checker.dart';
 import 'package:flutter_app/models/building.dart';
 import 'package:flutter_app/providers/campus_provider.dart';
 import 'package:flutter_app/providers/position_provider.dart';
+import 'package:flutter_app/providers/weather_provider.dart';
 import 'package:flutter_app/views/building_card.dart';
 import 'package:flutter_app/views/building_entry_view.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -25,11 +26,20 @@ class _PotpourriAppState extends State<PotpourriApp> {
   double? initialLat;
   double? initialLng;
   late final MapController myMapController;
+  late final WeatherChecker _weatherChecker;
+  late final Timer _checkerTimer;
 
   /// Initializes the state of the PotpourriApp
   @override
   initState() {
     myMapController = MapController();
+    final singleUseWeatherProvider = Provider.of<WeatherProvider>(context, listen: false);
+    _weatherChecker = WeatherChecker(singleUseWeatherProvider);
+    _checkerTimer = Timer.periodic(
+        const Duration(
+          seconds: 1,
+        ),
+        (timer) => _weatherChecker.fetchAndUpdateCurrentSeattleWeather());
     super.initState();
   }
 
@@ -37,6 +47,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
   @override
   dispose() {
     myMapController.dispose();
+    _checkerTimer.cancel();
     super.dispose();
   }
 
@@ -47,7 +58,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: Scaffold(
-            backgroundColor: const Color.fromARGB(255, 198, 202, 255),
+            backgroundColor: Colors.white,
             appBar: AppBar(
               centerTitle: true,
               title: const Text('Potpourri 🚽'),
@@ -97,7 +108,8 @@ class _PotpourriAppState extends State<PotpourriApp> {
                   ],
                 );
               } else {
-                return Expanded(child: _createMap(positionProvider, context));
+                _weatherChecker.updateLocation(latitude: positionProvider.latitude!, longitude: positionProvider.longitude!);
+                return _createMap(positionProvider, context);
               }
             }),
           ),
@@ -137,15 +149,12 @@ class _PotpourriAppState extends State<PotpourriApp> {
                 Marker(
                     point: LatLng(positionProvider.latitude!,
                         positionProvider.longitude!),
-                    width: 80,
-                    height: 80,
                     child: const Icon(
                       Icons.person_pin_circle_rounded,
                       color: Color.fromARGB(255, 245, 199, 31),
-                      size: 70
                     )),
                 ..._addMapPins(context)
-            ],
+              ],
             )
           ]),
     );
@@ -166,11 +175,9 @@ _addMapPins(BuildContext context) {
       Provider.of<CampusProvider>(context, listen: false).buildings;
   final out = [];
   for (final building in buildings) {
-    Color color = Color.fromARGB(255, 198, 202, 255);
+    Color color = Color.fromARGB(255, 7, 139, 211);
     out.add(Marker(
       point: LatLng(building.lat, building.lng),
-      width: 60,
-      height: 60,
       child: Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
@@ -181,8 +188,8 @@ _addMapPins(BuildContext context) {
         child: Material(
           clipBehavior: Clip.hardEdge,
           color: Colors.transparent,
-          child: Container(width: 60, height: 60, child: ClipRRect(
-            borderRadius: BorderRadius.circular(6),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
             child: InkWell(
               splashColor: Color.fromARGB(255, 245, 199, 31),
               onTap: () {
@@ -194,12 +201,12 @@ _addMapPins(BuildContext context) {
                 child: Text(
                   '🚽',
                   style: TextStyle(
-                    fontSize: 32.0, // Set font size
+                    fontSize: 19.0, // Set font size
                   ),
                 ),
               ),
             ),
-          )),
+          ),
         ),
       ),
     ));
