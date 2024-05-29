@@ -54,16 +54,29 @@ class _PotpourriAppState extends State<PotpourriApp> {
               actions: [
                 Consumer<CampusProvider>(
                     builder: (context, campusProvider, child) {
-                  return IconButton(
+                  return Semantics(
+                      label: "Open a random building's page",
+                      child: IconButton(
                       onPressed: () =>
                           {_imFeelingLucky(context, campusProvider)},
-                      icon: const Icon(Icons.find_replace_outlined));
+                      icon: const IconTheme(
+                        data: IconThemeData(size: 40), 
+                        child: Icon(Icons.find_replace_outlined)
+                      )
+                    ));
                 }),
                 Consumer<PositionProvider>(
                     builder: (context, positionProvider, child) {
-                  return IconButton(
-                      onPressed: () => {_centerMap(positionProvider)},
-                      icon: const Icon(Icons.location_on));
+                  return Padding(padding: const EdgeInsets.only(right: 20), 
+                    child: Semantics(
+                      label: 'Recenter map',
+                      child: IconButton(
+                        onPressed: () => {_centerMap(positionProvider)},
+                        icon: const IconTheme(
+                          data: IconThemeData(size: 40), 
+                          child: Icon(Icons.location_on)
+                        )
+                      )));
                 })
               ],
             ),
