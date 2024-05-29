@@ -123,7 +123,17 @@ class _PotpourriAppState extends State<PotpourriApp> {
                 _weatherChecker.updateLocation(
                     latitude: positionProvider.latitude!,
                     longitude: positionProvider.longitude!);
-                return _createMap(positionProvider, context);
+                return Column(
+                  children: [
+                    Consumer<WeatherProvider>(
+                        builder: (context, weatherProvider, child) {
+                      return Text(
+                        'Current Temperature ${weatherProvider.tempInFarenheit} °F',
+                      );
+                    }),
+                    Expanded(child: _createMap(positionProvider, context)),
+                  ],
+                );
               }
             }),
           ),
@@ -158,19 +168,6 @@ class _PotpourriAppState extends State<PotpourriApp> {
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'dev.potpourri.example',
             ),
-            LogoSourceAttribution(Consumer<WeatherProvider>(
-                builder: (context, weatherProvider, child) {
-              return Container(
-                color: const Color.fromARGB(255, 77, 161, 230),
-                child: SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: Text(
-                    'Current Temperature ${weatherProvider.tempInFarenheit} °F',
-                  ),
-                ),
-              );
-            })),
             MarkerLayer(
               markers: [
                 Marker(

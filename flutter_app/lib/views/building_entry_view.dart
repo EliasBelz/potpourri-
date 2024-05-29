@@ -52,19 +52,20 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
         ),
         centerTitle: true,
         actions: [
-          Padding(padding: const EdgeInsets.only(right: 20), 
-          child: Semantics(
-            label: 'Add new bathroom review',
-            child: IconButton(
-              onPressed: () => {
-                    setState(() {
-                      reviews.add(Review());
-                      ratingCount = reviews.length;
-                    })
-                  },
-              icon: const IconTheme(
-                data: IconThemeData(size: 40), 
-                child: const Icon(Icons.add_comment_outlined))))),
+          Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Semantics(
+                  label: 'Add new bathroom review',
+                  child: IconButton(
+                      onPressed: () => {
+                            setState(() {
+                              reviews.add(Review());
+                              ratingCount = reviews.length;
+                            })
+                          },
+                      icon: const IconTheme(
+                          data: IconThemeData(size: 40),
+                          child: Icon(Icons.add_comment_outlined))))),
         ],
       ),
       body: PopScope(
@@ -83,12 +84,12 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
           child: Column(
             children: [
               Container(
-                height: 300,
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                child: _createMap(widget.building.lat, widget.building.lng)
-              ),
+                  height: 300,
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.only(bottom: 10),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  child: _createMap(widget.building.lat, widget.building.lng)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -197,9 +198,8 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                           child: Text(
                         '🚽',
                         style: TextStyle(
-                          fontSize: 28.0, // Set font size
-                          color: Colors.black
-                        ),
+                            fontSize: 28.0, // Set font size
+                            color: Colors.black),
                       ))))
             ])
           ]),
