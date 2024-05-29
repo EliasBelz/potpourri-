@@ -9,6 +9,7 @@ import 'package:flutter_app/providers/position_provider.dart';
 import 'package:flutter_app/providers/weather_provider.dart';
 import 'package:flutter_app/views/building_card.dart';
 import 'package:flutter_app/views/building_entry_view.dart';
+import 'package:flutter_app/weather_conditions.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
@@ -127,9 +128,13 @@ class _PotpourriAppState extends State<PotpourriApp> {
                   children: [
                     Consumer<WeatherProvider>(
                         builder: (context, weatherProvider, child) {
-                      return Text(
-                        'Current Temperature ${weatherProvider.tempInFarenheit} °F',
-                      );
+                      final condition = weatherProvider.formattedCondition;
+
+                      return condition == WeatherCondition.unknown
+                          ? const Text('Failed to get weather :(')
+                          : Text(
+                              'Currently ${weatherProvider.tempInFarenheit} °F and ${weatherProvider.formattedCondition} ${weatherProvider.conditionEmoji}',
+                            );
                     }),
                     Expanded(child: _createMap(positionProvider, context)),
                   ],
