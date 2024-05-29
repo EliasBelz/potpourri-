@@ -59,12 +59,11 @@ class _PotpourriAppState extends State<PotpourriApp> {
                       icon: const Icon(Icons.find_replace_outlined));
                 }),
                 Consumer<PositionProvider>(
-                  builder: (context, positionProvider, child) {
-                    return IconButton(
-                        onPressed: () => {_centerMap(positionProvider)},
-                        icon: const Icon(Icons.location_on));
-                  }
-                )
+                    builder: (context, positionProvider, child) {
+                  return IconButton(
+                      onPressed: () => {_centerMap(positionProvider)},
+                      icon: const Icon(Icons.location_on));
+                })
               ],
             ),
             drawer: Drawer(
@@ -115,9 +114,11 @@ class _PotpourriAppState extends State<PotpourriApp> {
         ));
   }
 
-  _centerMap(PositionProvider positionProvider){
-    if(positionProvider.latitude != null || positionProvider.longitude != null){
-      myMapController.move(LatLng(positionProvider.latitude!, positionProvider.longitude!), 17);
+  _centerMap(PositionProvider positionProvider) {
+    if (positionProvider.latitude != null &&
+        positionProvider.longitude != null) {
+      myMapController.move(
+          LatLng(positionProvider.latitude!, positionProvider.longitude!), 17);
     }
   }
 
