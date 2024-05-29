@@ -1,12 +1,15 @@
+import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app/helpers/weather_checker.dart';
 import 'package:flutter_app/models/building.dart';
 import 'package:flutter_app/providers/campus_provider.dart';
 import 'package:flutter_app/providers/position_provider.dart';
+import 'package:flutter_app/providers/weather_provider.dart';
 import 'package:flutter_app/views/building_card.dart';
 import 'package:flutter_app/views/building_entry_view.dart';
+import 'package:flutter_app/weather_conditions.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
@@ -25,11 +28,21 @@ class _PotpourriAppState extends State<PotpourriApp> {
   double? initialLat;
   double? initialLng;
   late final MapController myMapController;
+  late final WeatherChecker _weatherChecker;
+  late final Timer _checkerTimer;
 
   /// Initializes the state of the PotpourriApp
   @override
   initState() {
     myMapController = MapController();
+    final singleUseWeatherProvider =
+        Provider.of<WeatherProvider>(context, listen: false);
+    _weatherChecker = WeatherChecker(singleUseWeatherProvider);
+    _checkerTimer = Timer.periodic(
+        const Duration(
+          seconds: 1,
+        ),
+        (timer) => _weatherChecker.fetchAndUpdateCurrentSeattleWeather());
     super.initState();
   }
 
@@ -37,6 +50,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
   @override
   dispose() {
     myMapController.dispose();
+    _checkerTimer.cancel();
     super.dispose();
   }
 
@@ -47,7 +61,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: Scaffold(
-            backgroundColor: const Color.fromARGB(255, 198, 202, 255),
+            backgroundColor: Colors.white,
             appBar: AppBar(
               centerTitle: true,
               title: const Text('Potpourri 🚽'),
@@ -57,26 +71,23 @@ class _PotpourriAppState extends State<PotpourriApp> {
                   return Semantics(
                       label: "Open a random building's page",
                       child: IconButton(
-                      onPressed: () =>
-                          {_imFeelingLucky(context, campusProvider)},
-                      icon: const IconTheme(
-                        data: IconThemeData(size: 40), 
-                        child: Icon(Icons.find_replace_outlined)
-                      )
-                    ));
+                          onPressed: () =>
+                              {_imFeelingLucky(context, campusProvider)},
+                          icon: const IconTheme(
+                              data: IconThemeData(size: 40),
+                              child: Icon(Icons.find_replace_outlined))));
                 }),
                 Consumer<PositionProvider>(
                     builder: (context, positionProvider, child) {
-                  return Padding(padding: const EdgeInsets.only(right: 20), 
-                    child: Semantics(
-                      label: 'Recenter map',
-                      child: IconButton(
-                        onPressed: () => {_centerMap(positionProvider)},
-                        icon: const IconTheme(
-                          data: IconThemeData(size: 40), 
-                          child: Icon(Icons.location_on)
-                        )
-                      )));
+                  return Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Semantics(
+                          label: 'Recenter map',
+                          child: IconButton(
+                              onPressed: () => {_centerMap(positionProvider)},
+                              icon: const IconTheme(
+                                  data: IconThemeData(size: 40),
+                                  child: Icon(Icons.location_on)))));
                 })
               ],
             ),
@@ -110,7 +121,24 @@ class _PotpourriAppState extends State<PotpourriApp> {
                   ],
                 );
               } else {
-                return Expanded(child: _createMap(positionProvider, context));
+                _weatherChecker.updateLocation(
+                    latitude: positionProvider.latitude!,
+                    longitude: positionProvider.longitude!);
+                return Column(
+                  children: [
+                    Consumer<WeatherProvider>(
+                        builder: (context, weatherProvider, child) {
+                      final condition = weatherProvider.formattedCondition;
+
+                      return condition == WeatherCondition.unknown
+                          ? const Text('Failed to get weather :(')
+                          : Text(
+                              'Currently ${weatherProvider.tempInFarenheit} °F and ${weatherProvider.formattedCondition} ${weatherProvider.conditionEmoji}',
+                            );
+                    }),
+                    Expanded(child: _createMap(positionProvider, context)),
+                  ],
+                );
               }
             }),
           ),
@@ -153,17 +181,16 @@ class _PotpourriAppState extends State<PotpourriApp> {
                     width: 80,
                     height: 80,
                     child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(width: 5, color: Color.fromARGB(255, 255, 200, 0))
-                      ), 
-                      child: const Icon(
-                        Icons.person_pin_circle_rounded,
-                        color: Color.fromARGB(255, 245, 199, 31),
-                        size: 70
-                    ))),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                width: 5,
+                                color: Color.fromARGB(255, 255, 200, 0))),
+                        child: const Icon(Icons.person_pin_circle_rounded,
+                            color: Color.fromARGB(255, 245, 199, 31),
+                            size: 70))),
                 ..._addMapPins(context)
-            ],
+              ],
             )
           ]),
     );
@@ -187,8 +214,8 @@ _addMapPins(BuildContext context) {
     Color color = Color.fromARGB(255, 148, 185, 255);
     out.add(Marker(
       point: LatLng(building.lat, building.lng),
-      width: 60,
-      height: 60,
+      width: 50,
+      height: 50,
       child: Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
@@ -199,7 +226,7 @@ _addMapPins(BuildContext context) {
         child: Material(
           clipBehavior: Clip.hardEdge,
           color: Colors.transparent,
-          child: Container(width: 60, height: 60, child: ClipRRect(
+          child: ClipRRect(
             borderRadius: BorderRadius.circular(6),
             child: InkWell(
               splashColor: Color.fromARGB(255, 245, 199, 31),
@@ -217,7 +244,7 @@ _addMapPins(BuildContext context) {
                 ),
               ),
             ),
-          )),
+          ),
         ),
       ),
     ));

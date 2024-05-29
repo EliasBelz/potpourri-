@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/models/buildings_db.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_app/providers/campus_provider.dart';
+import 'package:flutter_app/providers/weather_provider.dart';
 import 'package:flutter_app/views/potpourri_app.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,8 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => PositionProvider()),
       ChangeNotifierProvider(
-          create: (context) => CampusProvider(buildings: buildings.all))
+          create: (context) => CampusProvider(buildings: buildings.all)),
+      ChangeNotifierProvider(create: (context) => WeatherProvider())
     ],
     child: const PotpourriApp(),
   ));
