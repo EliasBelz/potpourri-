@@ -77,8 +77,13 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
           alignment: Alignment.center,
           child: Column(
             children: [
-              Expanded(
-                  child: _createMap(widget.building.lat, widget.building.lng)),
+              Container(
+                height: 300,
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                child: _createMap(widget.building.lat, widget.building.lng)
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -164,7 +169,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
       child: FlutterMap(
           options: MapOptions(
             initialCenter: LatLng(lat, long),
-            initialZoom: 17,
+            initialZoom: 18,
           ),
           children: [
             TileLayer(
@@ -174,9 +179,11 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
             MarkerLayer(markers: [
               Marker(
                   point: LatLng(lat, lng),
+                  width: 40,
+                  height: 40,
                   child: Container(
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 7, 139, 211),
+                        color: Color.fromARGB(255, 148, 185, 255),
                         borderRadius: BorderRadius.circular(10), // Add rounding
                         border: Border.all(
                             color: Colors.black, width: 2), // Add border
@@ -185,7 +192,8 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                           child: Text(
                         '🚽',
                         style: TextStyle(
-                          fontSize: 19.0, // Set font size
+                          fontSize: 28.0, // Set font size
+                          color: Colors.black
                         ),
                       ))))
             ])
