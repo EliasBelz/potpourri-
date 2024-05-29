@@ -123,8 +123,9 @@ class _ReviewWidgetState extends State<ReviewWidget> {
       }
       setState(() {
         reviewText = newText;
-        myController = TextEditingController(text: reviewText);
       });
+      myController.text = newText;
+      widget.review.review = newText;
     }
   }
 
@@ -150,6 +151,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
       } else if (action is TextAction) {
         setReviewText();
       }
+      widget.onEdit();
     }
   }
 
@@ -162,6 +164,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
       } else if (action is TextAction) {
         setReviewText();
       }
+      widget.onEdit();
     }
   }
 
