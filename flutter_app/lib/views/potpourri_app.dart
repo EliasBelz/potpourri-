@@ -49,6 +49,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
           child: Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
+              centerTitle: true,
               title: const Text('Potpourri 🚽'),
               actions: [
                 Consumer<CampusProvider>(
@@ -96,18 +97,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
                   ],
                 );
               } else {
-                return Column(
-                  children: [
-                    Center(
-                      child: Text(
-                          'Latitude: ${positionProvider.latitude!.toStringAsFixed(4)} Longitude: ${positionProvider.longitude!.toStringAsFixed(4)}',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black)),
-                    ),
-                    Expanded(child: _createMap(positionProvider, context)),
-                  ],
-                );
+                return Expanded(child: _createMap(positionProvider, context));
               }
             }),
           ),
