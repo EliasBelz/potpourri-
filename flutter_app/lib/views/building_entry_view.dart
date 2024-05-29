@@ -24,6 +24,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
   late double rating;
   late int ratingCount;
   late List<Review> reviews;
+  late bool isEditing;
 
   /// initializes state of building entry
   @override
@@ -57,15 +58,20 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
               child: Semantics(
                   label: 'Add new bathroom review',
                   child: IconButton(
-                      onPressed: () => {
-                            setState(() {
-                              reviews.add(Review());
-                              ratingCount = reviews.length;
-                            })
-                          },
-                      icon: const IconTheme(
+                      onPressed: !_allReviewsValid()
+                          ? null
+                          : () => {
+                                setState(() {
+                                  reviews.add(Review());
+                                  ratingCount = reviews.length;
+                                })
+                              },
+                      icon: IconTheme(
                           data: IconThemeData(size: 40),
-                          child: Icon(Icons.add_comment_outlined))))),
+                          child: Icon(Icons.add_comment_outlined,
+                              color: !_allReviewsValid()
+                                  ? Colors.grey
+                                  : Colors.black))))),
         ],
       ),
       body: PopScope(
@@ -204,5 +210,16 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
             ])
           ]),
     );
+  }
+
+  /// Checks if all reviews are valid.
+  /// Valid reviews have a non-empty review and a non-zero rating
+  _allReviewsValid() {
+    for (Review review in reviews) {
+      if (review.review == "" || review.rating == 0) {
+        return false;
+      }
+    }
+    return true;
   }
 }
