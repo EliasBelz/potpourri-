@@ -33,7 +33,8 @@ class _PotpourriAppState extends State<PotpourriApp> {
   @override
   initState() {
     myMapController = MapController();
-    final singleUseWeatherProvider = Provider.of<WeatherProvider>(context, listen: false);
+    final singleUseWeatherProvider =
+        Provider.of<WeatherProvider>(context, listen: false);
     _weatherChecker = WeatherChecker(singleUseWeatherProvider);
     _checkerTimer = Timer.periodic(
         const Duration(
@@ -65,16 +66,26 @@ class _PotpourriAppState extends State<PotpourriApp> {
               actions: [
                 Consumer<CampusProvider>(
                     builder: (context, campusProvider, child) {
-                  return IconButton(
-                      onPressed: () =>
-                          {_imFeelingLucky(context, campusProvider)},
-                      icon: const Icon(Icons.find_replace_outlined));
+                  return Semantics(
+                      label: "Open a random building's page",
+                      child: IconButton(
+                          onPressed: () =>
+                              {_imFeelingLucky(context, campusProvider)},
+                          icon: const IconTheme(
+                              data: IconThemeData(size: 40),
+                              child: Icon(Icons.find_replace_outlined))));
                 }),
                 Consumer<PositionProvider>(
                     builder: (context, positionProvider, child) {
-                  return IconButton(
-                      onPressed: () => {_centerMap(positionProvider)},
-                      icon: const Icon(Icons.location_on));
+                  return Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Semantics(
+                          label: 'Recenter map',
+                          child: IconButton(
+                              onPressed: () => {_centerMap(positionProvider)},
+                              icon: const IconTheme(
+                                  data: IconThemeData(size: 40),
+                                  child: Icon(Icons.location_on)))));
                 })
               ],
             ),
@@ -108,7 +119,9 @@ class _PotpourriAppState extends State<PotpourriApp> {
                   ],
                 );
               } else {
-                _weatherChecker.updateLocation(latitude: positionProvider.latitude!, longitude: positionProvider.longitude!);
+                _weatherChecker.updateLocation(
+                    latitude: positionProvider.latitude!,
+                    longitude: positionProvider.longitude!);
                 return _createMap(positionProvider, context);
               }
             }),
@@ -149,10 +162,17 @@ class _PotpourriAppState extends State<PotpourriApp> {
                 Marker(
                     point: LatLng(positionProvider.latitude!,
                         positionProvider.longitude!),
-                    child: const Icon(
-                      Icons.person_pin_circle_rounded,
-                      color: Color.fromARGB(255, 245, 199, 31),
-                    )),
+                    width: 80,
+                    height: 80,
+                    child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                width: 5,
+                                color: Color.fromARGB(255, 255, 200, 0))),
+                        child: const Icon(Icons.person_pin_circle_rounded,
+                            color: Color.fromARGB(255, 245, 199, 31),
+                            size: 70))),
                 ..._addMapPins(context)
               ],
             )
@@ -175,9 +195,11 @@ _addMapPins(BuildContext context) {
       Provider.of<CampusProvider>(context, listen: false).buildings;
   final out = [];
   for (final building in buildings) {
-    Color color = Color.fromARGB(255, 7, 139, 211);
+    Color color = Color.fromARGB(255, 148, 185, 255);
     out.add(Marker(
       point: LatLng(building.lat, building.lng),
+      width: 50,
+      height: 50,
       child: Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
@@ -189,7 +211,7 @@ _addMapPins(BuildContext context) {
           clipBehavior: Clip.hardEdge,
           color: Colors.transparent,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(6),
             child: InkWell(
               splashColor: Color.fromARGB(255, 245, 199, 31),
               onTap: () {
@@ -201,7 +223,7 @@ _addMapPins(BuildContext context) {
                 child: Text(
                   '🚽',
                   style: TextStyle(
-                    fontSize: 19.0, // Set font size
+                    fontSize: 32.0, // Set font size
                   ),
                 ),
               ),
