@@ -52,14 +52,19 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
         ),
         centerTitle: true,
         actions: [
-          IconButton(
+          Padding(padding: const EdgeInsets.only(right: 20), 
+          child: Semantics(
+            label: 'Add new bathroom review',
+            child: IconButton(
               onPressed: () => {
                     setState(() {
                       reviews.add(Review());
                       ratingCount = reviews.length;
                     })
                   },
-              icon: const Icon(Icons.add_comment_outlined)),
+              icon: const IconTheme(
+                data: IconThemeData(size: 40), 
+                child: const Icon(Icons.add_comment_outlined))))),
         ],
       ),
       body: PopScope(
