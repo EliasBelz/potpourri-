@@ -49,6 +49,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
           child: Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
+              centerTitle: true,
               title: const Text('Potpourri 🚽'),
               actions: [
                 Consumer<CampusProvider>(
@@ -58,6 +59,12 @@ class _PotpourriAppState extends State<PotpourriApp> {
                           {_imFeelingLucky(context, campusProvider)},
                       icon: const Icon(Icons.find_replace_outlined));
                 }),
+                Consumer<PositionProvider>(
+                    builder: (context, positionProvider, child) {
+                  return IconButton(
+                      onPressed: () => {_centerMap(positionProvider)},
+                      icon: const Icon(Icons.location_on));
+                })
               ],
             ),
             drawer: Drawer(
@@ -90,22 +97,19 @@ class _PotpourriAppState extends State<PotpourriApp> {
                   ],
                 );
               } else {
-                return Column(
-                  children: [
-                    Center(
-                      child: Text(
-                          'Latitude: ${positionProvider.latitude!.toStringAsFixed(4)} Longitude: ${positionProvider.longitude!.toStringAsFixed(4)}',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black)),
-                    ),
-                    Expanded(child: _createMap(positionProvider, context)),
-                  ],
-                );
+                return Expanded(child: _createMap(positionProvider, context));
               }
             }),
           ),
         ));
+  }
+
+  _centerMap(PositionProvider positionProvider) {
+    if (positionProvider.latitude != null &&
+        positionProvider.longitude != null) {
+      myMapController.move(
+          LatLng(positionProvider.latitude!, positionProvider.longitude!), 17);
+    }
   }
 
   // creates flutter map widget to display location
