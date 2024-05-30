@@ -15,32 +15,36 @@ class BuildingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-            splashColor: Colors.amber,
-            onTap: callBack,
-            child: ListTile(
-              leading: const Icon(Icons.house_outlined),
-              title: Text(name),
-              subtitle: Row(children: [
-                Expanded(child: Text(subtitle)),
-                Expanded(
-                  child: RatingBar(
-                    ignoreGestures: true,
-                    initialRating: rating,
-                    minRating: 0.5,
-                    maxRating: 5,
-                    allowHalfRating: true,
-                    itemSize: 20,
-                    ratingWidget: RatingWidget(
-                        full: const Icon(Icons.star),
-                        half: const Icon(Icons.star_half),
-                        empty: const Icon(Icons.star_border)),
-                    onRatingUpdate: (newRating) {},
+    return Semantics(
+      label: "$name, $subtitle, has a rating of $rating stars",
+      hint: "tap to open the review page and leave a review",
+      child: Card(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+              splashColor: Colors.amber,
+              onTap: callBack,
+              child: ListTile(
+                leading: const Icon(Icons.house_outlined),
+                title: Text(name),
+                subtitle: Row(children: [
+                  Expanded(child: Text(subtitle)),
+                  Expanded(
+                    child: RatingBar(
+                      ignoreGestures: true,
+                      initialRating: rating,
+                      minRating: 0.5,
+                      maxRating: 5,
+                      allowHalfRating: true,
+                      itemSize: 20,
+                      ratingWidget: RatingWidget(
+                          full: const Icon(Icons.star),
+                          half: const Icon(Icons.star_half),
+                          empty: const Icon(Icons.star_border)),
+                      onRatingUpdate: (newRating) {},
+                    ),
                   ),
-                ),
-              ]),
-            )));
+                ]),
+              ))),
+    );
   }
 }

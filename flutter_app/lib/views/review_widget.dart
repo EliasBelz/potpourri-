@@ -44,49 +44,55 @@ class _ReviewWidgetState extends State<ReviewWidget> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 2),
-                child: RatingBar(
-                  ignoreGestures: !widget.review.canEdit,
-                  initialRating: rating,
-                  minRating: 0.5,
-                  maxRating: 5,
-                  allowHalfRating: true,
-                  itemSize: 30,
-                  ratingWidget: RatingWidget(
-                      full: const Icon(Icons.star),
-                      half: const Icon(Icons.star_half),
-                      empty: const Icon(Icons.star_border)),
-                  onRatingUpdate: (newRating) {
-                    if (widget.review.canEdit) {
-                      futureActions.clear();
-                      pastActions.add(RatingAction(newRating));
-                      setRating();
-                      widget.onEdit();
-                    }
-                  },
+                child: Semantics(
+                  label: "Rating bar with $rating stars",
+                  child: RatingBar(
+                    ignoreGestures: !widget.review.canEdit,
+                    initialRating: rating,
+                    minRating: 0.5,
+                    maxRating: 5,
+                    allowHalfRating: true,
+                    itemSize: 30,
+                    ratingWidget: RatingWidget(
+                        full: const Icon(Icons.star),
+                        half: const Icon(Icons.star_half),
+                        empty: const Icon(Icons.star_border)),
+                    onRatingUpdate: (newRating) {
+                      if (widget.review.canEdit) {
+                        futureActions.clear();
+                        pastActions.add(RatingAction(newRating));
+                        setRating();
+                        widget.onEdit();
+                      }
+                    },
+                  ),
                 ),
               ),
               if (widget.review.canEdit) ...[insertUndoRedoButtons()],
             ],
           ),
-          TextField(
-            enabled: widget.review.canEdit,
-            controller: myController,
-            keyboardType: TextInputType.multiline,
-            style: const TextStyle(color: Colors.black),
-            maxLines: 5,
-            onChanged: (text) {
-              futureActions.clear();
-              pastActions.add(TextAction(text));
-              widget.review.review = text;
-              setReviewText();
-              widget.onEdit();
-            },
-            decoration: InputDecoration(
-              hintText: 'Enter your review here',
-              label: widget.review.canEdit
-                  ? null
-                  : const Text('Left by verified user'),
-              border: const OutlineInputBorder(),
+          Semantics(
+            label: widget.review.canEdit ? "Enter your review here" : 'Verified User left the review "$reviewText"',
+            child: TextField(
+              enabled: widget.review.canEdit,
+              controller: myController,
+              keyboardType: TextInputType.multiline,
+              style: const TextStyle(color: Colors.black),
+              maxLines: 5,
+              onChanged: (text) {
+                futureActions.clear();
+                pastActions.add(TextAction(text));
+                widget.review.review = text;
+                setReviewText();
+                widget.onEdit();
+              },
+              decoration: InputDecoration(
+                hintText: 'Enter your review here',
+                label: widget.review.canEdit
+                    ? null
+                    : const Text('Left by verified user', semanticsLabel: "Left by verified user",),
+                border: const OutlineInputBorder(),
+              ),
             ),
           ),
         ],
