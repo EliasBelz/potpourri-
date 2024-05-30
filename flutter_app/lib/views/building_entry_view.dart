@@ -7,24 +7,43 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
+/// Full screen view for a building
 class BuildingEntryView extends StatefulWidget {
+  /// Building to display
   final Building building;
 
+  /// Constructor
+  /// Parameters:
+  /// building (Building): The building to display
   const BuildingEntryView({super.key, required this.building});
 
+  /// Initiates state
   @override
   State<BuildingEntryView> createState() => _BuildingEntryViewState();
 }
 
+/// Companion state class for BuildingEntryView
 class _BuildingEntryViewState extends State<BuildingEntryView> {
+  /// Abbreviation of the building
   late String abbr;
+
+  /// Name of the building
   late String name;
+
+  /// Latitude of the building
   late double lat;
+
+  /// Longitude of the building
   late double lng;
+
+  /// Average rating of the building
   late double rating;
+
+  /// Number of ratings of the building
   late int ratingCount;
+
+  /// List of reviews of the building
   late List<Review> reviews;
-  late bool isEditing;
 
   /// initializes state of building entry
   @override
@@ -39,6 +58,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
     reviews = widget.building.reviews;
   }
 
+  /// Builds the widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +73,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
         ),
         centerTitle: true,
         actions: [
+          /// Add review button. You cannot ads a review if there is a pending review
           Padding(
               padding: const EdgeInsets.only(right: 20),
               child: Semantics(
@@ -67,7 +88,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                                 })
                               },
                       icon: IconTheme(
-                          data: IconThemeData(size: 40),
+                          data: const IconThemeData(size: 40),
                           child: Icon(Icons.add_comment_outlined,
                               color: !_allReviewsValid()
                                   ? Colors.grey
@@ -84,7 +105,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
           margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 224, 218, 255),
+              color: const Color.fromARGB(255, 224, 218, 255),
               borderRadius: BorderRadius.circular(20)),
           alignment: Alignment.center,
           child: Column(
@@ -176,7 +197,6 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
 
   // creates flutter map widget to display location of given building
   Widget _createMap(lat, long) {
-    //47.65334425420228, -122.30558811163986 = allen center true latlong
     return Center(
       child: FlutterMap(
           options: MapOptions(
@@ -195,7 +215,7 @@ class _BuildingEntryViewState extends State<BuildingEntryView> {
                   height: 40,
                   child: Container(
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 148, 185, 255),
+                        color: const Color.fromARGB(255, 148, 185, 255),
                         borderRadius: BorderRadius.circular(10), // Add rounding
                         border: Border.all(
                             color: Colors.black, width: 2), // Add border

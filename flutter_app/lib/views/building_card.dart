@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+/// A card that displays information about a building
 class BuildingCard extends StatelessWidget {
+  /// Building name
   final String name;
+
+  /// Callback function
   final VoidCallback callBack;
+
+  /// Card subtitle
   final String subtitle;
+
+  /// Building rating
   final double rating;
+
+  /// Constructor
+  /// Parameters:
+  /// name (String): The name of the building
+  /// callBack (VoidCallback): The function to be called when the card is tapped
+  /// subtitle (String): The subtitle of the card
+  /// rating (double): The rating of the building
   const BuildingCard(
       {required this.name,
       required this.callBack,
@@ -13,6 +28,7 @@ class BuildingCard extends StatelessWidget {
       required this.rating,
       super.key});
 
+  /// Builds the widget
   @override
   Widget build(BuildContext context) {
     return Semantics(

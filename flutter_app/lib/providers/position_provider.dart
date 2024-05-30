@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 class PositionProvider extends ChangeNotifier {
+  /// Current latitude
   double? latitude;
+
+  /// Current longitude
   double? longitude;
+  // Timer to update the position
   late Timer _updateTimer;
 
+  /// Constructor Initializes the timer to update the position every second
   PositionProvider() {
     _updateTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       await updatePosition();
@@ -70,6 +75,7 @@ class PositionProvider extends ChangeNotifier {
     }
   }
 
+  /// Deconstructor, disposes of the timer
   @override
   void dispose() {
     _updateTimer.cancel();
