@@ -13,6 +13,7 @@ Future<BuildingsDB> loadVenuesDB(String dataPath) async {
   return BuildingsDB.initializeFromJson(await rootBundle.loadString(dataPath));
 }
 
+/// Main function that runs the app
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final buildings = await loadVenuesDB('lib/data/building_data.json');
