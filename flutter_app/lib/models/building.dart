@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter_app/models/review.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../utils/rating_helper.dart';
