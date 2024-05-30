@@ -191,6 +191,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
                                 color: const Color.fromARGB(255, 255, 200, 0))),
                         child: const Icon(Icons.person_pin_circle_rounded,
                             color: Color.fromARGB(255, 245, 199, 31),
+                            shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 10)],
                             size: 70))),
                 ..._addMapPins(context)
               ],
