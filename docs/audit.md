@@ -8,6 +8,7 @@ The good:
 - Keyboard navigable
 - Most of the colors contrast well
 - The buttons for navigation are pretty big, and thus easy to hit
+- Many elements give some level of explanation when a screen reader is used
 
 ## Issue #1 - Size and Contrast
 
@@ -24,8 +25,17 @@ The good:
 - Justification: The issue is always visible on the main map view. While the contrast is not great, it's still pretty clear what the icon is meant to represent and you can always tell where it is on the map. It's just not easy on the eyes and might be an issue for users with colorblindness. The issue is partially helped by the size of the icon, which is very large; if it were smaller it would be a bigger issue for any user to see it.
 - Possible Solution: Consider making the icon a darker color, or outlining the icon in black so it stands out more against he background. Could also try changing the map display settings if possible to increase the contrast.
 
+
 ## Issue #2 - Screen Reader Accessibility
 
+- Name/Brief Description: Screen Reader failure
+- Testing Method: Using application
+- Evidence: MacOS VoiceOver utility
+
+- Explanation: The list elements in the drawer don't read off the rating average. Titles for each building inside the building view repeat themselves. When using the main map view, the screen reader utility repeats the word "toilet" over and over for each icon shown on the map.
+- Severity: 2 - Mild
+- Justification: The issue is fairly infrequent--most of the elements on the page appropriately explain their purpose and describe themselves accurately. There are a few elements on the page that either don't do this, or do it in a way that is unhelpful. Someone using a screenreader would probably not have much difficulty figuring out what's going on on the screen, but it would add a little annoyance as they tried to navigate through the interface.
+- Possible Solution: Consider adding more semantic tags, and/or getting more granular with where and how they're applied to avoid repeats. 
 
 
 ## Issue #3 - Robustness
@@ -39,5 +49,3 @@ The good:
 - Severity: 2 - Mild
 - Justification: The issue is always possible to run into for any user. If someone accidentally clicks the wrong button, or just wants to browse the app without being able to see the distance to each building, they have no option but to close and restart the application entirely. This is very tedious and locks users into a single binary choice early on in the decision tree.
 - Possible Solution: Consider prompting the user multiple times for their location data if they do not allow it initially. Also, users could potentially still browse the data on the app or leave reviews without having their location shared, it would just be a slightly different user experience.
-
-

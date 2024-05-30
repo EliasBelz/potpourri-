@@ -8,7 +8,7 @@ The University of Washington's Seattle campus sprawls across more than 600 acres
 ### Features
 - Pannable/zoomable map of UW shows locations of commonly accessed buildings with bathrooms
 - Move the map as the location of the user changes
-- Buildings with bathrooms also listed in sidebar drawer for quick access
+- Buildings with bathrooms also listed in sidebar drawer for quick access, organized by average rating
 - Each listed bathroom allows users to browse reviews, leave reviews, and see the location isolated on a map
 - Reviews are aggregated to display an average star rating
 - "I'm Feeling Lucky" random bathroom selection
@@ -22,20 +22,6 @@ The University of Washington's Seattle campus sprawls across more than 600 acres
 ## Data Flow
 describe the data structures you designed to hold user data, and how you architected your app to use Providers (or another framework, like Bloc) to propagate changes to these data in a reactive way.
 
-
-
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
 
 # Editing this README
 
