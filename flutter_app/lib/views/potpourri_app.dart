@@ -67,7 +67,10 @@ class _PotpourriAppState extends State<PotpourriApp> {
             backgroundColor: Colors.white,
             appBar: AppBar(
               centerTitle: true,
-              title: const Text('Potpourri 🚽'),
+              title: const Text(
+                'Potpourri 🚽',
+                semanticsLabel: "Potpourri",
+              ),
               actions: [
                 Consumer<CampusProvider>(
                     builder: (context, campusProvider, child) {
@@ -95,6 +98,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
               ],
             ),
             drawer: Drawer(
+              semanticLabel: "Building list",
               child: _fillDrawer(),
             ),
             body: Consumer<PositionProvider>(
@@ -134,9 +138,14 @@ class _PotpourriAppState extends State<PotpourriApp> {
                       final condition = weatherProvider.formattedCondition;
 
                       return condition == WeatherCondition.unknown
-                          ? const Text('Failed to get weather :(')
+                          ? const Text(
+                              'Failed to get weather :(',
+                              semanticsLabel: "Failed to get weather",
+                            )
                           : Text(
                               'Currently ${weatherProvider.tempInFarenheit} °F and ${weatherProvider.formattedCondition} ${weatherProvider.conditionEmoji}',
+                              semanticsLabel:
+                                  "Currently ${weatherProvider.tempInFarenheit} °F and ${weatherProvider.formattedCondition} ${weatherProvider.conditionEmoji}",
                             );
                     }),
                     Expanded(child: _createMap(positionProvider, context)),
@@ -225,30 +234,34 @@ _addMapPins(BuildContext context) {
       point: LatLng(building.lat, building.lng),
       width: 50,
       height: 50,
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(10), // Add rounding
-          border: Border.all(color: Colors.black, width: 2), // Add border
-        ),
-        child: Material(
+      child: Semantics(
+        label: building.name,
+        hint: "Press to open the review page and give a rating",
+        child: Container(
           clipBehavior: Clip.hardEdge,
-          color: Colors.transparent,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: InkWell(
-              splashColor: const Color.fromARGB(255, 245, 199, 31),
-              onTap: () {
-                Future.delayed(const Duration(milliseconds: 300), () {
-                  _navigateToEntry(context, building);
-                });
-              },
-              child: const Center(
-                child: Text(
-                  '🚽',
-                  style: TextStyle(
-                    fontSize: 32.0, // Set font size
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(10), // Add rounding
+            border: Border.all(color: Colors.black, width: 2), // Add border
+          ),
+          child: Material(
+            clipBehavior: Clip.hardEdge,
+            color: Colors.transparent,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: InkWell(
+                splashColor: const Color.fromARGB(255, 245, 199, 31),
+                onTap: () {
+                  Future.delayed(const Duration(milliseconds: 300), () {
+                    _navigateToEntry(context, building);
+                  });
+                },
+                child: const Center(
+                  child: Text(
+                    '🚽',
+                    style: TextStyle(
+                      fontSize: 32.0, // Set font size
+                    ),
                   ),
                 ),
               ),
