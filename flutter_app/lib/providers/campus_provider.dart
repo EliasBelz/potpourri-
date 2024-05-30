@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/building.dart';
 
+/// This class manages state for the campus
 class CampusProvider extends ChangeNotifier {
   /// List of buildings that represent the campus
   final List<Building> _buildings;
@@ -17,6 +18,8 @@ class CampusProvider extends ChangeNotifier {
   }
 
   /// Adds or updates a building in the list of buildings
+  /// parameters:
+  /// newBuilding (Building): the building to add or update
   upsertBuilding(Building newBuilding) {
     int index =
         _buildings.indexWhere((element) => element.abbr == newBuilding.abbr);

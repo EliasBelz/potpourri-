@@ -15,7 +15,6 @@ Future<BuildingsDB> loadVenuesDB(String dataPath) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   final buildings = await loadVenuesDB('lib/data/building_data.json');
   runApp(MultiProvider(
     providers: [

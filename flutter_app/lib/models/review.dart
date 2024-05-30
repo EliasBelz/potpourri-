@@ -1,6 +1,12 @@
+/// This class represents a review of a building
 class Review {
+  /// The review text
   String review;
+
+  /// Rating of the review
   double rating;
+
+  /// Whether the review can be edited
   bool canEdit;
 
   /// Constructor for Review object.

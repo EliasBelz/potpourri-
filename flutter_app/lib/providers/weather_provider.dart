@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/weather_conditions.dart';
+import 'package:flutter_app/models/weather_conditions.dart';
 
+/// Manages weather state
 class WeatherProvider extends ChangeNotifier {
+  /// Temperature in fahrenheit
   int tempInFarenheit = 0;
+
+  /// Weather condition
   WeatherCondition condition = WeatherCondition.unknown;
+
+  /// Whether the weather has been updated
   bool weatherUpdated = false;
 
+  /// Gets the current condition formatted as a string
   get formattedCondition {
     switch (condition) {
       case WeatherCondition.gloomy:
@@ -19,6 +26,7 @@ class WeatherProvider extends ChangeNotifier {
     }
   }
 
+  /// Gets the current condition formatted as an emoji
   get conditionEmoji {
     switch (condition) {
       case WeatherCondition.gloomy:
@@ -32,6 +40,10 @@ class WeatherProvider extends ChangeNotifier {
     }
   }
 
+  /// Updates the weather
+  /// parameters:
+  /// newTempFarenheit (int): the new temperature in fahrenheit
+  /// newCondition (WeatherCondition): the new weather condition
   updateWeather(int newTempFarenheit, WeatherCondition newCondition) {
     weatherUpdated = true;
     tempInFarenheit = newTempFarenheit;

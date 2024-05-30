@@ -16,7 +16,7 @@ class ReviewWidget extends StatefulWidget {
   /// Parameters:
   /// review (Review): The review to be displayed.
   /// onEdit (Function): The function to be called when the review is edited.
-  ReviewWidget({required this.review, required this.onEdit, super.key});
+  const ReviewWidget({required this.review, required this.onEdit, super.key});
 
   /// Initiates state
   @override
@@ -94,6 +94,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
     );
   }
 
+  /// Sets the rating to the last rating action in the pastActions list or 0 if there is none
   setRating() {
     double newRating = widget.review.rating;
     if (widget.review.canEdit) {
@@ -111,6 +112,8 @@ class _ReviewWidgetState extends State<ReviewWidget> {
     }
   }
 
+  /// Sets the review text to the last text action in the pastActions list
+  /// or an empty string if there is none
   setReviewText() {
     String newText = widget.review.review;
     if (widget.review.canEdit) {
@@ -129,19 +132,21 @@ class _ReviewWidgetState extends State<ReviewWidget> {
     }
   }
 
+  /// Creates undo and redo buttons
   Widget insertUndoRedoButtons() {
     return Row(
       children: [
         IconButton(
             onPressed: pastActions.isEmpty ? null : _undo,
-            icon: Icon(Icons.undo)),
+            icon: const Icon(Icons.undo)),
         IconButton(
             onPressed: futureActions.isEmpty ? null : _redo,
-            icon: Icon(Icons.redo)),
+            icon: const Icon(Icons.redo)),
       ],
     );
   }
 
+  /// Undoes the last action in the pastActions list
   void _undo() {
     if (pastActions.isNotEmpty) {
       final action = pastActions.removeLast();
@@ -155,6 +160,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
     }
   }
 
+  /// Redoes the last action in the futureActions list
   void _redo() {
     if (futureActions.isNotEmpty) {
       final action = futureActions.removeLast();

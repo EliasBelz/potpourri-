@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_app/helpers/weather_checker.dart';
 import 'package:flutter_app/models/building.dart';
 import 'package:flutter_app/providers/campus_provider.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_app/providers/position_provider.dart';
 import 'package:flutter_app/providers/weather_provider.dart';
 import 'package:flutter_app/views/building_card.dart';
 import 'package:flutter_app/views/building_entry_view.dart';
-import 'package:flutter_app/weather_conditions.dart';
+import 'package:flutter_app/models/weather_conditions.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
@@ -25,9 +24,13 @@ class PotpourriApp extends StatefulWidget {
 
 /// Companion state class for PotpourriApp
 class _PotpourriAppState extends State<PotpourriApp> {
+  // Initial Latitude for centering the map
   double? initialLat;
+  // Initial Longitude for centering the map
   double? initialLng;
+  // Map controller for the flutter map
   late final MapController myMapController;
+
   late final WeatherChecker _weatherChecker;
   late final Timer _checkerTimer;
 
@@ -145,6 +148,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
         ));
   }
 
+  /// Centers the map on the user's location
   _centerMap(PositionProvider positionProvider) {
     if (positionProvider.latitude != null &&
         positionProvider.longitude != null) {
@@ -153,9 +157,8 @@ class _PotpourriAppState extends State<PotpourriApp> {
     }
   }
 
-  // creates flutter map widget to display location
+  /// creates flutter map widget to display location
   Widget _createMap(PositionProvider positionProvider, context) {
-    //47.65334425420228, -122.30558811163986 = allen center true latlong
     if (initialLat == null || initialLng == null) {
       initialLat = positionProvider.latitude;
       initialLng = positionProvider.longitude;
@@ -185,7 +188,7 @@ class _PotpourriAppState extends State<PotpourriApp> {
                             shape: BoxShape.circle,
                             border: Border.all(
                                 width: 5,
-                                color: Color.fromARGB(255, 255, 200, 0))),
+                                color: const Color.fromARGB(255, 255, 200, 0))),
                         child: const Icon(Icons.person_pin_circle_rounded,
                             color: Color.fromARGB(255, 245, 199, 31),
                             size: 70))),
@@ -198,6 +201,9 @@ class _PotpourriAppState extends State<PotpourriApp> {
 }
 
 /// Navigates user to a random building.
+/// parameters:
+///  context: the current context
+/// campusProvider: the campus provider
 _imFeelingLucky(BuildContext context, CampusProvider campusProvider) {
   final buildings = campusProvider.buildings;
   final randIndex = Random().nextInt(buildings.length);
@@ -205,13 +211,15 @@ _imFeelingLucky(BuildContext context, CampusProvider campusProvider) {
   _navigateToEntry(context, randBuilding);
 }
 
-// add building pins to map
+/// add building pins to map
+/// parameters:
+/// context: the current build context
 _addMapPins(BuildContext context) {
   final buildings =
       Provider.of<CampusProvider>(context, listen: false).buildings;
   final out = [];
   for (final building in buildings) {
-    Color color = Color.fromARGB(255, 148, 185, 255);
+    Color color = const Color.fromARGB(255, 148, 185, 255);
     out.add(Marker(
       point: LatLng(building.lat, building.lng),
       width: 50,
@@ -229,9 +237,9 @@ _addMapPins(BuildContext context) {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(6),
             child: InkWell(
-              splashColor: Color.fromARGB(255, 245, 199, 31),
+              splashColor: const Color.fromARGB(255, 245, 199, 31),
               onTap: () {
-                Future.delayed(Duration(milliseconds: 300), () {
+                Future.delayed(const Duration(milliseconds: 300), () {
                   _navigateToEntry(context, building);
                 });
               },
@@ -253,17 +261,18 @@ _addMapPins(BuildContext context) {
   return out;
 }
 
-/// Fills the drawer with the list of locations
+/// Creates list view of buildings sorted by rating in descending order
 Widget _fillDrawer() {
   return Consumer<CampusProvider>(builder: (context, campusProvider, child) {
     List<Building> buildings = campusProvider.buildings;
+    buildings.sort((a, b) => b.rating.compareTo(a.rating));
     return ListView.builder(
         itemCount: buildings.length,
         itemBuilder: (context, index) {
           return BuildingCard(
             name: buildings[index].name,
             callBack: () => {
-              Future.delayed(Duration(milliseconds: 300), () {
+              Future.delayed(const Duration(milliseconds: 300), () {
                 _navigateToEntry(context, buildings[index]);
               })
             },
@@ -274,7 +283,10 @@ Widget _fillDrawer() {
   });
 }
 
-/// navigates user to the selected builing
+/// navigates user to the selected building
+/// parameters:
+/// context: the current build context
+/// building: the selected building
 Future<void> _navigateToEntry(BuildContext context, Building building) async {
   final newEntry = await Navigator.push(
       context,
